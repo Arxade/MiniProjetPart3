@@ -16,6 +16,8 @@ import java.util.Arrays;
  */
 public class Catalogue implements I_Catalogue {
 
+    private String nom;
+    
     private ArrayList<I_Produit> ensembleProduits;
     private static Catalogue instance;
 
