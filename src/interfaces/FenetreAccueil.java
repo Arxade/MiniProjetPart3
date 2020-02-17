@@ -3,6 +3,8 @@ package interfaces;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import controleurs.*;
+import java.util.Arrays;
 
 public class FenetreAccueil extends JFrame implements ActionListener {
 
@@ -11,6 +13,7 @@ public class FenetreAccueil extends JFrame implements ActionListener {
     private JLabel lbNbCatalogues;
     private JComboBox cmbSupprimer, cmbSelectionner;
     private TextArea taDetailCatalogues;
+    private ControleurAccueil ctrl = new ControleurAccueil();
 
     public FenetreAccueil() {
         setTitle("Catalogues");
@@ -76,11 +79,7 @@ public class FenetreAccueil extends JFrame implements ActionListener {
         btSupprimer.addActionListener(this);
         btSelectionner.addActionListener(this);
 
-        String[] tab = {"Formacia", "Le Redoutable", "Noitaicossa"};
-        modifierListesCatalogues(tab);
-        String[] tab2 = {"Formacia : 6 produits", "Le Redoutable : 4 produits", "Noitaicossa : 0 produits"};
-        modifierDetailCatalogues(tab2);
-        modifierNbCatalogues(3);
+        majAffichage();
         setVisible(true);
     }
 
@@ -88,14 +87,20 @@ public class FenetreAccueil extends JFrame implements ActionListener {
         if (e.getSource() == btAjouter) {
             String texteAjout = txtAjouter.getText();
             if (!texteAjout.equals("")) {
+                ctrl.addCatalogue(texteAjout);
+                System.out.println(Arrays.toString(ctrl.getDetailsDesCatalogues()));
                 System.out.println("ajouter le catalogue " + texteAjout);
+                majAffichage();
                 txtAjouter.setText(null);
             }
         }
         if (e.getSource() == btSupprimer) {
             String texteSupprime = (String) cmbSupprimer.getSelectedItem();
             if (texteSupprime != null) {
+                ctrl.removeCatalogue(texteSupprime);
+                System.out.println(Arrays.toString(ctrl.getDetailsDesCatalogues()));
                 System.out.println("supprime catalogue " + texteSupprime);
+                majAffichage();
             }
         }
         if (e.getSource() == btSelectionner) {
@@ -129,6 +134,15 @@ public class FenetreAccueil extends JFrame implements ActionListener {
                 taDetailCatalogues.append(detailCatalogues[i] + "\n");
             }
         }
+    }
+    
+    private void majAffichage()
+    {
+        String[] tab = ctrl.getNomsDesCatalogues();
+        modifierListesCatalogues(tab);
+        String[] tab2 = ctrl.getDetailsDesCatalogues();
+        modifierDetailCatalogues(tab2);
+        modifierNbCatalogues(ctrl.getNombreDeCatalogues());
     }
 
     public static void main(String[] args) {

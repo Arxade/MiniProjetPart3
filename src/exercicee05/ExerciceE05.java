@@ -24,13 +24,6 @@ public class ExerciceE05 {
         //Controleur ctrl = new Controleur();
         FenetreAccueil fenetre = new FenetreAccueil();
         
-        EnsembleCatalogue lesCat = new EnsembleCatalogue();
-        Catalogue cat1 = new Catalogue("test");
-        Catalogue cat2 = new Catalogue("poke");
-        lesCat.addCatalogue(cat1);
-        lesCat.addCatalogue(cat2);
-        System.out.println(lesCat.getCatalogueFromNom("poke").getNom());
-        
     }
 
 }

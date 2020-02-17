@@ -17,19 +17,19 @@ import java.util.Arrays;
 public class Catalogue implements I_Catalogue {
 
     private String nom;
-    private ArrayList<I_Produit> ensembleProduits;
+    private ArrayList<I_Produit> ensembleProduits = new ArrayList<>();
     //private static Catalogue instance;
 
+    
+    @Override
     public ArrayList<I_Produit> getEnsembleProduits() {
         return ensembleProduits;
     }
 
     public Catalogue() {
-        ensembleProduits = new ArrayList<I_Produit>();
     }
     
     public Catalogue(String nom) {
-        ensembleProduits = new ArrayList<I_Produit>();
         this.nom = nom;
     }
 
@@ -94,27 +94,20 @@ public class Catalogue implements I_Catalogue {
         }
         return ajoute;
     }
- // Function to remove duplicates from an ArrayList 
-    public static <I_Produit> List<I_Produit> removeDuplicates(List<I_Produit> list) 
-    { 
-  
-        // Create a new ArrayList 
-        List<I_Produit> newList = new ArrayList<I_Produit>(); 
-  
-        // Traverse through the first list 
-        for (I_Produit element : list) { 
-  
-            // If this element is not present in newList 
-            // then add it 
-            if (!newList.contains(element)) { 
-  
-                newList.add(element); 
-            } 
-        } 
-  
-        // return the new list 
-        return newList; 
-    } 
+
+    
+    public static <I_Produit> List<I_Produit> removeDuplicates(List<I_Produit> list) {
+
+        List<I_Produit> newList = new ArrayList<>();
+
+        for (I_Produit element : list) {
+            if (!newList.contains(element)) {
+                newList.add(element);
+            }
+        }
+        return newList;
+    }
+
     @Override
     public int addProduits(List<I_Produit> catalogNew) {
         int i = 0;

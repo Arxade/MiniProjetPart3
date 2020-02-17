@@ -26,7 +26,33 @@ public class EnsembleCatalogue {
     public boolean removeCatalogue(I_Catalogue catalogue) {
         return lesCatalogues.remove(catalogue);
     }
+
+    public ArrayList<I_Catalogue> getLesCatalogues() {
+        return lesCatalogues;
+    }
+
+    public String[] getNomsDesCatalogues() {
+        ArrayList<String> lesNomsAL = new ArrayList<>();
+        for (I_Catalogue cat : lesCatalogues) {
+            lesNomsAL.add(cat.getNom());
+        }
+        String[] lesNomsTab = lesNomsAL.toArray(new String[lesNomsAL.size()]);
+        return lesNomsTab;
+    }
     
+    public String[] getDétailsDesCatalogues() {
+        ArrayList<String> lesNomsAL = new ArrayList<>();
+        for (I_Catalogue cat : lesCatalogues) {
+            lesNomsAL.add(cat.getNom() + " : " + cat.getEnsembleProduits().size() + " produits");
+        }
+        String[] lesNomsTab = lesNomsAL.toArray(new String[lesNomsAL.size()]);
+        return lesNomsTab;
+    }
+
+    public int getNombreDeCatalogues() {
+        return lesCatalogues.size();
+    }
+
     public I_Catalogue getCatalogueFromNom(String nomCatalogue) {
         int i = 0;
         boolean trouve = false;
@@ -38,7 +64,7 @@ public class EnsembleCatalogue {
                 i++;
             }
         }
-        
+
         if (trouve == true) {
             return lesCatalogues.get(i);
         } else {
@@ -47,6 +73,3 @@ public class EnsembleCatalogue {
     }
 
 }
-    
-    
- 
