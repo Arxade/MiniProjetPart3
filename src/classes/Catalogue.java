@@ -18,14 +18,19 @@ public class Catalogue implements I_Catalogue {
 
     private String nom;
     private ArrayList<I_Produit> ensembleProduits;
-    private static Catalogue instance;
+    //private static Catalogue instance;
 
     public ArrayList<I_Produit> getEnsembleProduits() {
         return ensembleProduits;
     }
 
-    protected Catalogue() {
+    public Catalogue() {
         ensembleProduits = new ArrayList<I_Produit>();
+    }
+    
+    public Catalogue(String nom) {
+        ensembleProduits = new ArrayList<I_Produit>();
+        this.nom = nom;
     }
 
     public String getNom() {
@@ -37,9 +42,7 @@ public class Catalogue implements I_Catalogue {
     }
     
     public static Catalogue getInstance(){
-        if (instance == null)
-            instance = new Catalogue();
-        return instance;
+        return new Catalogue();
     }
 
     @Override
