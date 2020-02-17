@@ -34,6 +34,12 @@ public class Catalogue implements I_Catalogue {
             instance = new Catalogue();
         return instance;
     }
+    
+    @Override
+    public String getNom()
+    {
+        return nom;
+    }
 
     @Override
     public String toString() {

@@ -13,7 +13,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import sun.security.jca.GetInstance;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -45,7 +44,7 @@ public class ProduitDAORel implements I_ProduitDAO {
     public boolean connect() {
         try {
             String url = "jdbc:oracle:thin:@162.38.222.149:1521:iut";
-            connection = DriverManager.getConnection(url, "diazt", "1107013536H");
+            connection = DriverManager.getConnection(url, "bernadaca", "1110042889h");
             System.out.println("Connexion à la BDD");
             return true;
         } catch (HeadlessException | SQLException e) {
