@@ -46,10 +46,14 @@ public class FenetreNouveauProduit extends JFrame implements ActionListener {
 		btValider.addActionListener(this);
 		setVisible(true);
 	}
-
-	public void actionPerformed(ActionEvent e) {
-		ControleurProduit ctrlProd = new ControleurProduit();
-                ctrlProd.createProduit(txtNom.getText(), Double.parseDouble(txtPrixHT.getText()), Integer.parseInt(txtQte.getText()));     
-	}
+        
+    public void actionPerformed(ActionEvent e) {
+        ControleurProduit ctrlProd = new ControleurProduit();
+        if (!txtPrixHT.getText().trim().equals("") && !txtQte.getText().trim().equals("") && !txtNom.getText().trim().equals("")) {
+            ctrlProd.createProduit(txtNom.getText(), Double.parseDouble(txtPrixHT.getText()), Integer.parseInt(txtQte.getText()));
+        } else {
+            JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs");
+        }
+    }
 
 }
