@@ -17,7 +17,6 @@ import java.util.Arrays;
 public class Catalogue implements I_Catalogue {
 
     private String nom;
-    
     private ArrayList<I_Produit> ensembleProduits;
     private static Catalogue instance;
 
@@ -28,17 +27,19 @@ public class Catalogue implements I_Catalogue {
     protected Catalogue() {
         ensembleProduits = new ArrayList<I_Produit>();
     }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
     
     public static Catalogue getInstance(){
         if (instance == null)
             instance = new Catalogue();
         return instance;
-    }
-    
-    @Override
-    public String getNom()
-    {
-        return nom;
     }
 
     @Override

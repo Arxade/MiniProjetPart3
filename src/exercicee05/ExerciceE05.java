@@ -9,6 +9,7 @@ import interfaces.FenetrePrincipale;
 import classes.*;
 import controleurs.*;
 import dao.*;
+import interfaces.FenetreAccueil;
 
 /**
  *
@@ -21,7 +22,7 @@ public class ExerciceE05 {
      */
     public static void main(String[] args) {
         Controleur ctrl = new Controleur();
-        FenetrePrincipale fenetre = new FenetrePrincipale();
+        FenetreAccueil fenetre = new FenetreAccueil();
         
     }
 
