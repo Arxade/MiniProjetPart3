@@ -6,6 +6,7 @@
 package controleurs;
 
 import classes.*;
+import dao.*;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -15,15 +16,20 @@ import javax.swing.JOptionPane;
  */
 public class ControleurAccueil {
     
+    
+    private CatalogueDAO dao = new CatalogueDAO();
     private EnsembleCatalogue ensembleCat = getEnsembleCatalogue();
     
     public void addCatalogue(String nomCatalogue) {
         Catalogue catalogue = new Catalogue(nomCatalogue);
-        ensembleCat.addCatalogue(catalogue);  
+        ensembleCat.addCatalogue(catalogue);
+        dao.create(catalogue);
     }
 
     public void removeCatalogue(String nomCatalogue) {
+        
         ensembleCat.removeCatalogue(ensembleCat.getCatalogueFromNom(nomCatalogue));
+        dao.delete(ensembleCat.getCatalogueFromNom(nomCatalogue));
     }
     
     public ArrayList<I_Catalogue> getLesCatalogues(){

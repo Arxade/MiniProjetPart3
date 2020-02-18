@@ -6,7 +6,7 @@ import javax.swing.*;
 import controleurs.*;
 import java.util.Arrays;
 
-public class FenetreAccueil extends JFrame implements ActionListener {
+public class FenetreAccueil extends JFrame implements ActionListener, WindowListener {
 
     private JButton btAjouter, btSupprimer, btSelectionner;
     private JTextField txtAjouter;
@@ -79,7 +79,9 @@ public class FenetreAccueil extends JFrame implements ActionListener {
         btSupprimer.addActionListener(this);
         btSelectionner.addActionListener(this);
 
+        
         majAffichage();
+        addWindowListener(this);
         setVisible(true);
     }
 
@@ -135,6 +137,18 @@ public class FenetreAccueil extends JFrame implements ActionListener {
             }
         }
     }
+    
+    public void windowClosing(WindowEvent arg0) {
+        System.out.println("Au revoir");
+        System.exit(0);
+    }
+    
+    	public void windowActivated(WindowEvent arg0) {}
+	public void windowClosed(WindowEvent arg0) {}
+	public void windowDeactivated(WindowEvent arg0) {}
+	public void windowDeiconified(WindowEvent arg0) {}
+	public void windowIconified(WindowEvent arg0) {}
+	public void windowOpened(WindowEvent arg0) {}
     
     private void majAffichage()
     {
