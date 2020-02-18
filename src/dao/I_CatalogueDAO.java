@@ -20,9 +20,9 @@ public interface I_CatalogueDAO {
 
     public boolean delete(Catalogue cat);
 
-    public ArrayList<Catalogue> readAll();
+    public ArrayList<I_Catalogue> readAll();
 
-    public Produit read(String nomCatalogue);
+    public I_Catalogue read(String nomCatalogue);
 
     public boolean update(Catalogue cat);
     
