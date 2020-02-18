@@ -1,4 +1,5 @@
 package interfaces;
+import controleurs.ControleurPrincipal;
 import controleurs.ControleurTransaction;
 import java.awt.*;
 import java.awt.event.*;
@@ -9,8 +10,9 @@ public class FenetreAchat extends JFrame implements ActionListener {
 	private JButton btAchat;
 	private JTextField txtQuantite;
 	private JComboBox<String> combo;
+        private ControleurTransaction ctrlTransaction;
 
-	public FenetreAchat(String[] lesProduits) {
+	public FenetreAchat(String[] lesProduits, ControleurPrincipal ctrlPrincipal) {
 
 		setTitle("Achat");
 		setBounds(500, 500, 200, 125);
@@ -29,6 +31,7 @@ public class FenetreAchat extends JFrame implements ActionListener {
 		contentPane.add(btAchat);
 
 		btAchat.addActionListener(this);
+                ctrlTransaction = ctrlPrincipal.createControleurTransaction();
 
 		this.setVisible(true);
 	}
@@ -36,8 +39,7 @@ public class FenetreAchat extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btAchat)
                 {
-                    ControleurTransaction ctrT = new ControleurTransaction();
-                    ctrT.enregistrerAchat(combo.getSelectedItem().toString(), Integer.parseInt(txtQuantite.getText()) , FenetreAchat.this);
+                    ctrlTransaction.enregistrerAchat(combo.getSelectedItem().toString(), Integer.parseInt(txtQuantite.getText()) , FenetreAchat.this);
                 }
 	}
 

@@ -13,7 +13,7 @@ public class FenetreAccueil extends JFrame implements ActionListener, WindowList
     private JLabel lbNbCatalogues;
     private JComboBox cmbSupprimer, cmbSelectionner;
     private TextArea taDetailCatalogues;
-    private ControleurAccueil ctrl = new ControleurAccueil();
+    private ControleurPrincipal ctrl = new ControleurPrincipal();
 
     public FenetreAccueil() {
         setTitle("Catalogues");
@@ -90,7 +90,6 @@ public class FenetreAccueil extends JFrame implements ActionListener, WindowList
             String texteAjout = txtAjouter.getText();
             if (!texteAjout.equals("")) {
                 ctrl.addCatalogue(texteAjout);
-                System.out.println(Arrays.toString(ctrl.getDetailsDesCatalogues()));
                 System.out.println("ajouter le catalogue " + texteAjout);
                 majAffichage();
                 txtAjouter.setText(null);
@@ -100,7 +99,6 @@ public class FenetreAccueil extends JFrame implements ActionListener, WindowList
             String texteSupprime = (String) cmbSupprimer.getSelectedItem();
             if (texteSupprime != null) {
                 ctrl.removeCatalogue(texteSupprime);
-                System.out.println(Arrays.toString(ctrl.getDetailsDesCatalogues()));
                 System.out.println("supprime catalogue " + texteSupprime);
                 majAffichage();
             }
@@ -109,7 +107,9 @@ public class FenetreAccueil extends JFrame implements ActionListener, WindowList
             String texteSelection = (String) cmbSupprimer.getSelectedItem();
             if (texteSelection != null) {
                 System.out.println("selectionne catalogue " + texteSelection);
-                this.dispose();
+                ctrl.setCatalogue(texteSelection);
+                new FenetrePrincipale(ctrl);
+                this.setVisible(false);
             }
         }
     }

@@ -12,11 +12,11 @@ import javax.swing.*;
  *
  * @author diazt
  */
-public class ControleurProduit extends Controleur {
+public class ControleurProduit extends ControleurPrincipal {
 
     public void createProduit(String nom, double prix, int qteStock) {
         Produit produit = null;
-        if (catalogue.addProduit(nom, prix, qteStock) == false) {
+        if (catalogueSelected.addProduit(nom, prix, qteStock) == false) {
             JOptionPane.showMessageDialog(null, "Produit déjà existant ou prix invalide", "Erreur", JOptionPane.ERROR_MESSAGE);
         } else {
         produit = new Produit(nom, prix, qteStock);
@@ -27,7 +27,7 @@ public class ControleurProduit extends Controleur {
     }
 
     public void removeProduit(String nomProduit) {
-        catalogue.removeProduit(nomProduit);
+        catalogueSelected.removeProduit(nomProduit);
         Produit produit = dao.read(nomProduit);
         dao.delete(produit);
         JOptionPane.showMessageDialog(null, "Produit " + produit.getNom() + " supprimé");

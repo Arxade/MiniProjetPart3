@@ -8,14 +8,14 @@ package controleurs;
  *
  * @author diazt
  */
-public class ControleurStock extends Controleur{
+public class ControleurStock extends ControleurPrincipal{  
     
     public String getStock(){
-        return catalogue.toString();
+        return catalogueSelected.toString();
     }
     
     public String[] getNomsProduits() {
-        return catalogue.getNomProduits();
+        return catalogueSelected.getNomProduits();
     }
     
     
