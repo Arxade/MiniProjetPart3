@@ -44,7 +44,7 @@ public class CatalogueDAO implements I_CatalogueDAO {
     }
 
     @Override
-    public boolean create(Catalogue cat) {
+    public boolean create(I_Catalogue cat) {
         String requete = "INSERT INTO CATALOGUES (idCatalogue, nomCatalogue) "
                 + "VALUES (seqCatalogues.nextval,?)";
         try {
@@ -59,7 +59,7 @@ public class CatalogueDAO implements I_CatalogueDAO {
     }
 
     @Override
-    public boolean delete(Catalogue cat) {
+    public boolean delete(I_Catalogue cat) {
         String requete = "DELETE FROM CATALOGUES WHERE NOMCATALOGUE = ? ";
         try {
             preparedStatement = connection.prepareStatement(requete);
@@ -106,11 +106,6 @@ public class CatalogueDAO implements I_CatalogueDAO {
             System.out.println("Erreur read : " + ex);
         }
         return cat;
-    }
-
-    @Override
-    public boolean update(Catalogue cat) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

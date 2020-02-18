@@ -16,15 +16,13 @@ public interface I_CatalogueDAO {
     
     public boolean connect();
 
-    public boolean create(Catalogue cat);
+    public boolean create(I_Catalogue cat);
 
-    public boolean delete(Catalogue cat);
+    public boolean delete(I_Catalogue cat);
 
     public ArrayList<I_Catalogue> readAll();
 
     public I_Catalogue read(String nomCatalogue);
-
-    public boolean update(Catalogue cat);
     
     public boolean addProduit(I_Produit produit);
     
