@@ -62,6 +62,10 @@ public class ControleurPrincipal {
     public void setCatalogue(String catalogueSelectionne){
         catalogueSelected = ensembleCat.getCatalogueFromNom(catalogueSelectionne);
     }
+
+    public I_Catalogue getCatalogueSelected() {
+        return catalogueSelected;
+    }
     
     public ControleurStock createControleurStock(){
         ControleurStock ctrlStock = new ControleurStock();
