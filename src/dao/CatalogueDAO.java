@@ -113,9 +113,18 @@ public class CatalogueDAO implements I_CatalogueDAO {
         try
         {
             I_Catalogue cat = Catalogue.getInstance();
+            ResultSet rs = null;
+            String nomCatalogue = "";
+            
+            preparedStatement = connection.prepareStatement("SELECT IDCATALOGUE WHERE NOMCATALOGUE = ?");
+            preparedStatement.setString(1, cat.getNom());
+            rs = preparedStatement.executeQuery();
+            rs.next();
+            nomCatalogue = rs.getString(1);
+            
             String requete = "UPDATE PRODUITS SET IDCATALOGUE = ?";
             preparedStatement = connection.prepareStatement(requete);
-            preparedStatement.setString(1 , cat.getNom());
+            preparedStatement.setString(1 , nomCatalogue);
             preparedStatement.executeUpdate();
             return true;
         }
