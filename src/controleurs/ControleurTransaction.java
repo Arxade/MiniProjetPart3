@@ -27,9 +27,9 @@ public class ControleurTransaction extends ControleurPrincipal{
         }
         else
         {
-            Produit produit = dao.read(nomProduit);
+            Produit produit = prodDao.read(nomProduit);
             produit.setQuantiteStock(produit.getQuantite() + qteAchete);
-            dao.update(produit);
+            prodDao.update(produit);
             JOptionPane.showMessageDialog(laFenetre, "Produit acheté");
         }
     }
@@ -44,9 +44,9 @@ public class ControleurTransaction extends ControleurPrincipal{
         }
         else
         {
-            Produit produit = dao.read(nomProduit);
+            Produit produit = prodDao.read(nomProduit);
             produit.setQuantiteStock(produit.getQuantite() - QteVendue);
-            dao.update(produit);
+            prodDao.update(produit);
             JOptionPane.showMessageDialog(laFenetre, "Produit vendu");
         }
     }

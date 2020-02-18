@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 public class ControleurPrincipal {
 
     protected I_CatalogueDAO catDao = new CatalogueDAO();
-    protected I_ProduitDAO dao = ProduitDAOFactory.createProduitDAORelationnel();
+    protected I_ProduitDAO prodDao = ProduitDAOFactory.createProduitDAORelationnel();
     protected EnsembleCatalogue ensembleCat = getEnsembleCatalogue();
     protected I_Catalogue catalogueSelected;
     

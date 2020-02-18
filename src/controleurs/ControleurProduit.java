@@ -20,16 +20,15 @@ public class ControleurProduit extends ControleurPrincipal {
             JOptionPane.showMessageDialog(null, "Produit déjà existant ou prix invalide", "Erreur", JOptionPane.ERROR_MESSAGE);
         } else {
         produit = new Produit(nom, prix, qteStock);
-        System.out.println(produit.toString());
-        dao.create(produit);
+        catDao.addProduit(produit);
         JOptionPane.showMessageDialog(null, "Le produit " + nom + " a bien été créé.", "Produit créé", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
     public void removeProduit(String nomProduit) {
         catalogueSelected.removeProduit(nomProduit);
-        Produit produit = dao.read(nomProduit);
-        dao.delete(produit);
+        Produit produit = prodDao.read(nomProduit);
+        //catDao.removeProduit();
         JOptionPane.showMessageDialog(null, "Produit " + produit.getNom() + " supprimé");
     }
 
