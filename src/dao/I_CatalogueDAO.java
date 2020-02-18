@@ -26,4 +26,6 @@ public interface I_CatalogueDAO {
 
     public boolean update(Catalogue cat);
     
+    public boolean addProduit(I_Produit produit);
+    
 }

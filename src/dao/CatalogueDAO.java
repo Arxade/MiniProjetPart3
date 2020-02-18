@@ -7,6 +7,7 @@ package dao;
 
 import classes.Catalogue;
 import classes.I_Catalogue;
+import classes.I_Produit;
 import classes.Produit;
 import java.awt.HeadlessException;
 import java.sql.Connection;
@@ -111,5 +112,25 @@ public class CatalogueDAO implements I_CatalogueDAO {
     public boolean update(Catalogue cat) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public boolean addProduit(I_Produit produit) {
+        try
+        {
+            I_Catalogue cat = Catalogue.getInstance();
+            String requete = "UPDATE PRODUITS SET IDCATALOGUE = ?";
+            preparedStatement = connection.prepareStatement(requete);
+            preparedStatement.setString(1 , cat.getNom());
+            preparedStatement.executeUpdate();
+            return true;
+        }
+        catch(SQLException ex)
+        {
+            System.out.println("Erreur lors de l'ajout d'un produit " + ex);
+            return false;
+        }
+    }
+    
+    
     
 }
