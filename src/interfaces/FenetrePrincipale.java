@@ -18,9 +18,10 @@ public class FenetrePrincipale extends JFrame implements ActionListener,
 	private JButton btAchat;
 	private JButton btVente;
 	private JButton btQuitter;
-
+        private ControleurStock ctrlStock;
+        private ControleurPrincipal ctrlPrincipal;
 	
-	public FenetrePrincipale() {
+	public FenetrePrincipale(ControleurPrincipal ctrlPrinipal) {
 		
 		setTitle("exercice Produits");
 		setBounds(500, 500, 320, 250);
@@ -63,6 +64,8 @@ public class FenetrePrincipale extends JFrame implements ActionListener,
 		btVente.addActionListener(this);
 		btQuitter.addActionListener(this);
 		
+                this.ctrlPrincipal = ctrlPrinipal;
+                this.ctrlStock = ctrlPrinipal.createControleurStock();
 		addWindowListener(this);
 		setVisible(true);
 	}
@@ -74,26 +77,26 @@ public class FenetrePrincipale extends JFrame implements ActionListener,
         //String[] tabProduits = new String[] { "Mars", "Raider", "Twix", "Treets", "M&M's", "Smarties" };
 /* M�me chose pour tabCategories (partie 4) */
 //		String[] tabCategories = new String[] {"Bio", "Luxe" };
-        ControleurStock ctrlStock = new ControleurStock();
+        
         if (e.getSource() == btAfficher) {
             new FenetreAffichage(ctrlStock.getStock());
         }
         if (e.getSource() == btNouveauProduit) //			new FenetreNouveauProduit(tabCategories);
         {
-            new FenetreNouveauProduit();
+            new FenetreNouveauProduit(ctrlPrincipal);
         }
         if (e.getSource() == btSupprimerProduit) {
-            new FenetreSuppressionProduit(ctrlStock.getNomsProduits());
+            new FenetreSuppressionProduit(ctrlStock.getNomsProduits(), ctrlPrincipal);
         }
 //		if (e.getSource() == btNouvelleCategorie)
 //			new FenetreNouvelleCategorie();
 //		if (e.getSource() == btSupprimerCategorie)
 //			new FenetreSuppressionCategorie(tabCategories);
         if (e.getSource() == btAchat) {
-            new FenetreAchat(ctrlStock.getNomsProduits());
+            new FenetreAchat(ctrlStock.getNomsProduits(), ctrlPrincipal);
         }
         if (e.getSource() == btVente) {
-            new FenetreVente(ctrlStock.getNomsProduits());
+            new FenetreVente(ctrlStock.getNomsProduits(), ctrlPrincipal);
         }
         if (e.getSource() == btQuitter) {
             System.out.println("Au revoir");
@@ -116,7 +119,6 @@ public class FenetrePrincipale extends JFrame implements ActionListener,
 	
 	
 	public static void main(String[] args) {
-		new FenetrePrincipale();
 	}
 
 }

@@ -43,6 +43,10 @@ public class CatalogueDAO implements I_CatalogueDAO {
         }
     }
 
+    public Connection getConnection() {
+        return connection;
+    }
+
     @Override
     public boolean create(I_Catalogue cat) {
         String requete = "INSERT INTO CATALOGUES (idCatalogue, nomCatalogue) "
@@ -87,7 +91,6 @@ public class CatalogueDAO implements I_CatalogueDAO {
         } catch (SQLException ex) {
             System.out.println("Erreur read : " + ex);
         }
-        System.out.println(lesCatalogues);
         return lesCatalogues;
     }
 

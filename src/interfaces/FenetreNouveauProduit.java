@@ -11,9 +11,10 @@ public class FenetreNouveauProduit extends JFrame implements ActionListener {
 	private JTextField txtQte;
 //	private JComboBox<String> combo;
 	private JButton btValider;
+        private ControleurProduit ctrlProduit;
 
 //	public FenetreNouveauProduit(String[] lesCategories) {
-	public FenetreNouveauProduit() {	
+	public FenetreNouveauProduit(ControleurPrincipal ctrlPrincipal) {	
 
 		setTitle("Creation Produit");
 		setBounds(500, 500, 200, 250);
@@ -44,13 +45,14 @@ public class FenetreNouveauProduit extends JFrame implements ActionListener {
 		contentPane.add(btValider);
 
 		btValider.addActionListener(this);
+                
+                ctrlProduit = ctrlPrincipal.createControleurProduit();
 		setVisible(true);
 	}
         
     public void actionPerformed(ActionEvent e) {
-        ControleurProduit ctrlProd = new ControleurProduit();
         if (!txtPrixHT.getText().trim().equals("") && !txtQte.getText().trim().equals("") && !txtNom.getText().trim().equals("")) {
-            ctrlProd.createProduit(txtNom.getText(), Double.parseDouble(txtPrixHT.getText()), Integer.parseInt(txtQte.getText()));
+            ctrlProduit.createProduit(txtNom.getText(), Double.parseDouble(txtPrixHT.getText()), Integer.parseInt(txtQte.getText()));
         } else {
             JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs");
         }

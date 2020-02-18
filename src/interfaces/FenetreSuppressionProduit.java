@@ -1,4 +1,5 @@
 package interfaces;
+import controleurs.ControleurPrincipal;
 import controleurs.ControleurProduit;
 import java.awt.*;
 import java.awt.event.*;
@@ -8,8 +9,9 @@ public class FenetreSuppressionProduit extends JFrame implements ActionListener 
 
 	private JButton btSupprimer;
 	private JComboBox<String> combo;
+        private ControleurProduit ctrlProduit;
 	
-	public FenetreSuppressionProduit(String lesProduits[]) {
+	public FenetreSuppressionProduit(String lesProduits[], ControleurPrincipal ctrlPrincipal) {
 		
 		setTitle("Suppression produit");
 		setBounds(500, 500, 200, 105);
@@ -25,12 +27,12 @@ public class FenetreSuppressionProduit extends JFrame implements ActionListener 
 
 		btSupprimer.addActionListener(this);
 
+                ctrlProduit = ctrlPrincipal.createControleurProduit();
 		this.setVisible(true);
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		ControleurProduit ctrlProd = new ControleurProduit();
-                ctrlProd.removeProduit(combo.getSelectedItem().toString());
+                ctrlProduit.removeProduit(combo.getSelectedItem().toString());
                 this.dispose();
 	}
 

@@ -15,11 +15,11 @@ import javax.swing.JOptionPane;
  *
  * @author diazt
  */
-public class ControleurTransaction extends Controleur{
+public class ControleurTransaction extends ControleurPrincipal{
     
     public void enregistrerAchat(String nomProduit, int qteAchete, Component laFenetre)
     {
-        boolean achete = catalogue.acheterStock(nomProduit, qteAchete);
+        boolean achete = catalogueSelected.acheterStock(nomProduit, qteAchete);
         
         if(!achete)
         {
@@ -36,7 +36,7 @@ public class ControleurTransaction extends Controleur{
     
     public void enregistrerVente(String nomProduit, int QteVendue, Component laFenetre)
     {
-        boolean vendu = catalogue.vendreStock(nomProduit, QteVendue);
+        boolean vendu = catalogueSelected.vendreStock(nomProduit, QteVendue);
         
         if(!vendu)
         {

@@ -19,8 +19,12 @@ public class EnsembleCatalogue {
     }
 
     public boolean addCatalogue(I_Catalogue catalogue) {
-        lesCatalogues.add(catalogue);
-        return true;
+        return lesCatalogues.add(catalogue);
+    }
+    
+    public boolean addLesCatalogues(ArrayList<I_Catalogue> lesCat)
+    {
+        return lesCatalogues.addAll(lesCat);
     }
 
     public boolean removeCatalogue(I_Catalogue catalogue) {
