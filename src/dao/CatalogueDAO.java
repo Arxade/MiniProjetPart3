@@ -114,19 +114,27 @@ public class CatalogueDAO implements I_CatalogueDAO {
         {
             I_Catalogue cat = Catalogue.getInstance();
             ResultSet rs = null;
-            String nomCatalogue = "";
-            
-            preparedStatement = connection.prepareStatement("SELECT IDCATALOGUE WHERE NOMCATALOGUE = ?");
-            preparedStatement.setString(1, cat.getNom());
+            String nomCatalogue = cat.getNom();
+            int idProd;
+            int idCat;
+            preparedStatement = connection.prepareStatement("SELECT MAX(IDPRODUIT) FROM PRODUITS WHERE NOMProduit = ?");
+            preparedStatement.setString(1, produit.getNom());
             rs = preparedStatement.executeQuery();
             rs.next();
-            nomCatalogue = rs.getString(1);
+            idProd = rs.getInt(1);
             
-            String requete = "UPDATE PRODUITS SET IDCATALOGUE = ?";
-            preparedStatement = connection.prepareStatement(requete);
-            preparedStatement.setString(1 , nomCatalogue);
-            preparedStatement.executeUpdate();
+            preparedStatement = connection.prepareStatement("SELECT IDCATALOGUE FROM CATALOGUES WHERE NOMCATALOGUE = ?");
+            preparedStatement.setString(1, nomCatalogue);
+            rs = preparedStatement.executeQuery();
+            rs.next();
+            idCat = rs.getInt(1);
+            
+            preparedStatement = connection.prepareCall("CALL ADDPRODUITTOCATALOGUE(?,?)");
+            preparedStatement.setInt(1, idCat);
+            preparedStatement.setInt(2, idProd);
+            
             return true;
+            
         }
         catch(SQLException ex)
         {
