@@ -104,7 +104,7 @@ public class FenetreAccueil extends JFrame implements ActionListener, WindowList
             }
         }
         if (e.getSource() == btSelectionner) {
-            String texteSelection = (String) cmbSupprimer.getSelectedItem();
+            String texteSelection = (String) cmbSelectionner.getSelectedItem();
             if (texteSelection != null) {
                 System.out.println("selectionne catalogue " + texteSelection);
                 ctrl.setCatalogue(texteSelection);
