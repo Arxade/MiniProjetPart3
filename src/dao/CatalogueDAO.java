@@ -129,13 +129,19 @@ public class CatalogueDAO implements I_CatalogueDAO {
             
             System.err.println(nomCatalogue);
             
-            
-            CallableStatement callableStatement = connection.prepareCall("{call addProduitToCatalogue(?, ?, ?, ?)}");
-            callableStatement.setInt(1, idCat);
-            callableStatement.setString(2, nom);
-            callableStatement.setDouble(3, prix);
-            callableStatement.setInt(4, stock);
-            callableStatement.execute();
+            preparedStatement = connection.prepareStatement("SELECT NOMPRODUIT FROM PRODUITS WHERE IDCATALOGUE = ?");
+            preparedStatement.setInt(1, idCat);
+            rs = preparedStatement.executeQuery();
+            rs.next();
+            if(rs.wasNull())
+            {
+                CallableStatement callableStatement = connection.prepareCall("{call addProduitToCatalogue(?, ?, ?, ?)}");
+                callableStatement.setInt(1, idCat);
+                callableStatement.setString(2, nom);
+                callableStatement.setDouble(3, prix);
+                callableStatement.setInt(4, stock);
+                callableStatement.execute();
+            }
             
             return true;
             
