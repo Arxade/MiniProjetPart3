@@ -19,6 +19,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -146,6 +148,34 @@ public class CatalogueDAO implements I_CatalogueDAO {
             return false;
         }
     }
+    
+    @Override
+    public ArrayList<I_Produit> getProduitsFromCatalogue(I_Catalogue catalogue) {
+                    ArrayList<I_Produit> lesProduits = new ArrayList<>();
+        try {
+
+            String requete = "SELECT * FROM PRODUITS "
+                    + "NATURAL JOIN CATALOGUES "
+                    + "WHERE NOMCATALOGUE = ?";
+            ResultSet rs;
+            String nomCatalogue = catalogue.getNom();
+            
+            preparedStatement = connection.prepareStatement(requete);
+            preparedStatement.setString(1, nomCatalogue);
+            rs = preparedStatement.executeQuery();
+            I_Produit leProduit = null;
+            while (rs.next()) {
+                leProduit = new Produit(rs.getString("NOMPRODUIT"), rs.getDouble("PRIXHTPRODUIT"), rs.getInt("QTESTOCKPRODUIT"));
+                lesProduits.add(leProduit);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CatalogueDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return lesProduits;
+    }
+    
+
     
     
     
