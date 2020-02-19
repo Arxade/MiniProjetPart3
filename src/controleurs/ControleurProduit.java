@@ -19,8 +19,7 @@ public class ControleurProduit extends ControleurPrincipal {
         if (catalogueSelected.addProduit(nom, prix, qteStock) == false) {
             JOptionPane.showMessageDialog(null, "Produit déjà existant ou prix invalide", "Erreur", JOptionPane.ERROR_MESSAGE);
         } else {
-        produit = new Produit(nom, prix, qteStock);
-        catDao.addProduit(produit);
+        catDao.addProduit(nom , prix , qteStock , catalogueSelected);
         JOptionPane.showMessageDialog(null, "Le produit " + nom + " a bien été créé.", "Produit créé", JOptionPane.INFORMATION_MESSAGE);
         }
     }

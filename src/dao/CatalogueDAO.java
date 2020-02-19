@@ -10,6 +10,7 @@ import classes.I_Catalogue;
 import classes.I_Produit;
 import classes.Produit;
 import java.awt.HeadlessException;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -112,29 +113,29 @@ public class CatalogueDAO implements I_CatalogueDAO {
     }
 
     @Override
-    public boolean addProduit(I_Produit produit) {
+    public boolean addProduit(String nom , double prix , int stock, I_Catalogue selectedCatalogue) {
         try
         {
-            I_Catalogue cat = Catalogue.getInstance();
-            ResultSet rs = null;
-            String nomCatalogue = cat.getNom();
-            int idProd;
-            int idCat;
-            preparedStatement = connection.prepareStatement("SELECT MAX(IDPRODUIT) FROM PRODUITS WHERE NOMProduit = ?");
-            preparedStatement.setString(1, produit.getNom());
-            rs = preparedStatement.executeQuery();
-            rs.next();
-            idProd = rs.getInt(1);
+            ResultSet rs;
+            String nomCatalogue = selectedCatalogue.getNom();
+            int idCat = 0;
             
             preparedStatement = connection.prepareStatement("SELECT IDCATALOGUE FROM CATALOGUES WHERE NOMCATALOGUE = ?");
             preparedStatement.setString(1, nomCatalogue);
             rs = preparedStatement.executeQuery();
             rs.next();
             idCat = rs.getInt(1);
+            System.out.println(idCat);
             
-            preparedStatement = connection.prepareCall("CALL ADDPRODUITTOCATALOGUE(?,?)");
-            preparedStatement.setInt(1, idCat);
-            preparedStatement.setInt(2, idProd);
+            System.err.println(nomCatalogue);
+            
+            
+            CallableStatement callableStatement = connection.prepareCall("{call addProduitToCatalogue(?, ?, ?, ?)}");
+            callableStatement.setInt(1, idCat);
+            callableStatement.setString(2, nom);
+            callableStatement.setDouble(3, prix);
+            callableStatement.setInt(4, stock);
+            callableStatement.execute();
             
             return true;
             
