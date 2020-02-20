@@ -41,9 +41,9 @@ public class Catalogue implements I_Catalogue {
         this.nom = nom;
     }
     
-    public static Catalogue getInstance(){
-        return new Catalogue();
-    }
+    /*public static Catalogue getInstance(){
+    return new Catalogue();
+    }*/
 
     @Override
     public String toString() {

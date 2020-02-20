@@ -116,41 +116,41 @@ public class CatalogueDAO implements I_CatalogueDAO {
 
     @Override
     public boolean addProduit(String nom , double prix , int stock, I_Catalogue selectedCatalogue) {
-        try
+        if(selectedCatalogue.addProduit(nom, prix, stock))
         {
-            ResultSet rs;
-            String nomCatalogue = selectedCatalogue.getNom();
-            int idCat = 0;
-            
-            preparedStatement = connection.prepareStatement("SELECT IDCATALOGUE FROM CATALOGUES WHERE NOMCATALOGUE = ?");
-            preparedStatement.setString(1, nomCatalogue);
-            rs = preparedStatement.executeQuery();
-            rs.next();
-            idCat = rs.getInt(1);
-            System.out.println(idCat);
-            
-            System.err.println(nomCatalogue);
-            
-            preparedStatement = connection.prepareStatement("SELECT NOMPRODUIT FROM PRODUITS WHERE IDCATALOGUE = ?");
-            preparedStatement.setInt(1, idCat);
-            rs = preparedStatement.executeQuery();
-            rs.next();
-            if(rs.wasNull())
+            try
             {
+                ResultSet rs;
+                String nomCatalogue = selectedCatalogue.getNom();
+                int idCat = 0;
+
+                preparedStatement = connection.prepareStatement("SELECT IDCATALOGUE FROM CATALOGUES WHERE NOMCATALOGUE = ?");
+                preparedStatement.setString(1, nomCatalogue);
+                rs = preparedStatement.executeQuery();
+                rs.next();
+                idCat = rs.getInt(1);
+                System.out.println(idCat);
+
+                System.err.println(nomCatalogue);
+
                 CallableStatement callableStatement = connection.prepareCall("{call addProduitToCatalogue(?, ?, ?, ?)}");
                 callableStatement.setInt(1, idCat);
                 callableStatement.setString(2, nom);
                 callableStatement.setDouble(3, prix);
                 callableStatement.setInt(4, stock);
                 callableStatement.execute();
+
+                return true;
+
             }
-            
-            return true;
-            
+            catch(SQLException ex)
+            {
+                System.out.println("Erreur lors de l'ajout d'un produit " + ex);
+                return false;
+            }
         }
-        catch(SQLException ex)
+        else
         {
-            System.out.println("Erreur lors de l'ajout d'un produit " + ex);
             return false;
         }
     }
