@@ -116,8 +116,6 @@ public class CatalogueDAO implements I_CatalogueDAO {
 
     @Override
     public boolean addProduit(String nom , double prix , int stock, I_Catalogue selectedCatalogue) {
-        if(selectedCatalogue.addProduit(nom, prix, stock))
-        {
             try
             {
                 ResultSet rs;
@@ -148,11 +146,6 @@ public class CatalogueDAO implements I_CatalogueDAO {
                 System.out.println("Erreur lors de l'ajout d'un produit " + ex);
                 return false;
             }
-        }
-        else
-        {
-            return false;
-        }
     }
     
     @Override
