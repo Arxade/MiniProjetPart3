@@ -7,7 +7,7 @@ package controleurs;
 import classes.Catalogue;
 import classes.Produit;
 import dao.I_ProduitDAO;
-import dao.ProduitDAOFactory;
+import dao.RelDAOFactory;
 import dao.ProduitDAORel;
 import java.awt.Component;
 import javax.swing.JOptionPane;

@@ -32,6 +32,20 @@ public class CatalogueDAO implements I_CatalogueDAO {
     private DatabaseMetaData dbMetadata = null;
     private Statement statement = null;
     private PreparedStatement preparedStatement = null;
+    private static I_CatalogueDAO instance;
+    
+    public static I_CatalogueDAO getInstance(Connection co)
+    {
+        if(instance == null)
+        {
+            instance = new CatalogueDAO(co);
+        }
+        return instance;
+    }
+    private CatalogueDAO(Connection co)
+    {
+        connection = co;
+    }
     
     @Override
     public boolean connect() {

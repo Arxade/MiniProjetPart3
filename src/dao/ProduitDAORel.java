@@ -31,30 +31,22 @@ public class ProduitDAORel implements I_ProduitDAO {
     private PreparedStatement preparedStatement = null;
     private static ProduitDAORel instanceDAO;
     
-    static public ProduitDAORel getInstance()
+    static public ProduitDAORel getInstance(Connection co)
     {
         if(instanceDAO == null)
         {
-            instanceDAO = new ProduitDAORel();
+            instanceDAO = new ProduitDAORel(co);
         }
         return instanceDAO;
     }
 
     @Override
     public boolean connect() {
-        try {
-            String url = "jdbc:oracle:thin:@162.38.222.149:1521:iut";
-            connection = DriverManager.getConnection(url, "bernadaca", "1110042889h");
-            System.out.println("Connexion à la BDD");
-            return true;
-        } catch (HeadlessException | SQLException e) {
-            javax.swing.JOptionPane.showMessageDialog(null, e);
-            return false;
-        }
+        return true;
     }
 
-    protected ProduitDAORel() {
-        this.connect();
+    protected ProduitDAORel(Connection co) {
+        this.connection = co;
     }
 
     @Override
