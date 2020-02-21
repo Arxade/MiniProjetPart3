@@ -32,7 +32,7 @@ public class RelDAOFactory extends DAOAbstractFactory{
 
     public  I_CatalogueDAO createCatalogueDAO() {
         this.connect();
-        return CatalogueDAO.getInstance(connection);
+        return CatalogueDAORel.getInstance(connection);
     }
     
     public  I_ProduitDAO createProduitDAO() {

@@ -26,7 +26,7 @@ import java.util.logging.Logger;
  *
  * @author Arxade
  */
-public class CatalogueDAO implements I_CatalogueDAO {
+public class CatalogueDAORel implements I_CatalogueDAO {
 
     private Connection connection = null;
     private DatabaseMetaData dbMetadata = null;
@@ -38,11 +38,11 @@ public class CatalogueDAO implements I_CatalogueDAO {
     {
         if(instance == null)
         {
-            instance = new CatalogueDAO(co);
+            instance = new CatalogueDAORel(co);
         }
         return instance;
     }
-    private CatalogueDAO(Connection co)
+    private CatalogueDAORel(Connection co)
     {
         connection = co;
     }
@@ -183,7 +183,7 @@ public class CatalogueDAO implements I_CatalogueDAO {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(CatalogueDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CatalogueDAORel.class.getName()).log(Level.SEVERE, null, ex);
         }
             return lesProduits;
     }

@@ -16,12 +16,12 @@ public class XMLDAOFactory extends DAOAbstractFactory{
 
     @Override
     public  I_ProduitDAO createProduitDAO() {
-        return new AdaptateurProduitDAO_XML();
+        return AdaptateurProduitDAO_XML.getInstance();
     }
 
     @Override
     public I_CatalogueDAO createCatalogueDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new CatalogueDAO_XML();
     }
     
 
