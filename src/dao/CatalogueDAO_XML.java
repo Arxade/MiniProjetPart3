@@ -25,7 +25,9 @@ public class CatalogueDAO_XML implements I_CatalogueDAO{
 
     private static I_CatalogueDAO instance;
     private String uri = "D:/Catalogues.xml";
+    private String uriP = "D:/Produits.xml";
     private Document doc;
+    private Document docP;
     
     protected CatalogueDAO_XML()
     {
@@ -39,6 +41,7 @@ public class CatalogueDAO_XML implements I_CatalogueDAO{
         try
         {
                 doc = sdoc.build(uri);
+                docP = sdoc.build(uriP);
                 return true;
         } 
         catch (Exception e) 
@@ -60,7 +63,7 @@ public class CatalogueDAO_XML implements I_CatalogueDAO{
         }
         catch (Exception e) 
         {
-			System.out.println("erreur creer produit");
+			System.out.println("erreur creer Catalogue");
 			return false;
         }
     }
@@ -134,7 +137,7 @@ public class CatalogueDAO_XML implements I_CatalogueDAO{
     @Override
     public boolean addProduit(String nom, double prix, int stock, I_Catalogue selectedCatalogue) {
         try {
-			Element root = doc.getRootElement();
+			Element root = docP.getRootElement();
 			Element prod = new Element("produit");
 			prod.setAttribute("nom", nom);
 			Element prixEle = new Element("prixHT");
@@ -147,13 +150,38 @@ public class CatalogueDAO_XML implements I_CatalogueDAO{
 			return sauvegarde();
 		} catch (Exception e) {
 			System.out.println("erreur creer produit");
+			
+		}
+        try {
+			Element cat = chercheCatalogue(selectedCatalogue.getNom());
+			cat.setAttribute("nom", nom);
+			Element prixEle = new Element("prixHT");
+			cat.addContent(prixEle.setText(String.valueOf(prix)));
+                        cat.addContent(cat.setText(selectedCatalogue.getNom()));
+			return sauvegarde();
+		} catch (Exception e) {
+			System.out.println("Incrémentation nombre de produits");
 			return false;
 		}
     }
 
     @Override
     public ArrayList<I_Produit> getProduitsFromCatalogue(I_Catalogue catalogue) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                List<I_Produit> l = new ArrayList<I_Produit>();
+		try {
+			Element root = doc.getRootElement();
+			List<Element> lProd = root.getChildren("produit");
+
+			for (Element prod : lProd) {
+				String nomP = prod.getAttributeValue("nom");
+				Double prix = Double.parseDouble(prod.getChild("prixHT").getText());
+				int qte = Integer.parseInt(prod.getChild("quantite").getText());
+				l.add(new Produit(nomP, prix, qte));
+			}
+		} catch (Exception e) {
+			System.out.println("erreur lireTous tous les produits");
+		}
+		return (ArrayList<I_Produit>) l;
     }
     
 }
