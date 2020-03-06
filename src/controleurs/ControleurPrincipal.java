@@ -55,14 +55,12 @@ public class ControleurPrincipal {
     
     public EnsembleCatalogue getEnsembleCatalogue() {
         EnsembleCatalogue ec = new EnsembleCatalogue();
-        catDao.connect();
         ec.addLesCatalogues(catDao.readAll());
         for (I_Catalogue leCatalogue : ec.getLesCatalogues())
         {
            leCatalogue.addProduits(catDao.getProduitsFromCatalogue(leCatalogue));
         }
 
-        System.out.println(ec.getLesCatalogues().toString());
         return ec;
     }
     

@@ -15,28 +15,12 @@ import java.sql.SQLException;
  * @author Alexandre
  */
 public class RelDAOFactory extends DAOAbstractFactory{
-    
-    private Connection connection = null;
-    
-    public boolean connect() {
-        try {
-            String url = "jdbc:oracle:thin:@162.38.222.149:1521:iut";
-            connection = DriverManager.getConnection(url, "bernadaca", "1110042889h");
-            System.out.println("Connexion à la BDD");
-            return true;
-        } catch (HeadlessException | SQLException e) {
-            javax.swing.JOptionPane.showMessageDialog(null, e);
-            return false;
-        }
-    }
 
     public  I_CatalogueDAO createCatalogueDAO() {
-        this.connect();
-        return CatalogueDAORel.getInstance(connection);
+        return CatalogueDAORel.getInstance();
     }
     
     public  I_ProduitDAO createProduitDAO() {
-        this.connect();
-        return ProduitDAORel.getInstance(connection);
+        return ProduitDAORel.getInstance(CatalogueDAORel.getInstance().getConnection());
     }
 }

@@ -10,6 +10,7 @@ import classes.I_Catalogue;
 import classes.I_Produit;
 import classes.Produit;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import org.jdom.Document;
@@ -22,6 +23,8 @@ import org.jdom.output.XMLOutputter;
  * @author Alexandre
  */
 public class CatalogueDAO_XML implements I_CatalogueDAO{
+
+
 
     private static I_CatalogueDAO instance;
     private String uri = "D:/Catalogues.xml";
@@ -182,6 +185,11 @@ public class CatalogueDAO_XML implements I_CatalogueDAO{
 			System.out.println("erreur lireTous tous les produits");
 		}
 		return (ArrayList<I_Produit>) l;
+    }
+    
+        @Override
+    public Connection getConnection() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

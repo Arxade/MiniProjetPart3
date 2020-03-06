@@ -34,17 +34,18 @@ public class CatalogueDAORel implements I_CatalogueDAO {
     private PreparedStatement preparedStatement = null;
     private static I_CatalogueDAO instance;
     
-    public static I_CatalogueDAO getInstance(Connection co)
+    public static I_CatalogueDAO getInstance()
     {
         if(instance == null)
         {
-            instance = new CatalogueDAORel(co);
+            instance = new CatalogueDAORel();
         }
         return instance;
     }
-    private CatalogueDAORel(Connection co)
+    
+    private CatalogueDAORel()
     {
-        connection = co;
+        this.connect();
     }
     
     @Override
@@ -60,6 +61,7 @@ public class CatalogueDAORel implements I_CatalogueDAO {
         }
     }
 
+    @Override
     public Connection getConnection() {
         return connection;
     }

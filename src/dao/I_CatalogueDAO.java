@@ -6,6 +6,7 @@
 package dao;
 
 import classes.*;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -28,5 +29,7 @@ public interface I_CatalogueDAO {
     public boolean addProduit(String nom , double prix , int stock , I_Catalogue selectedCatalogue);
     
     public ArrayList<I_Produit> getProduitsFromCatalogue(I_Catalogue catalogue);
+    
+    public Connection getConnection();
     
 }
