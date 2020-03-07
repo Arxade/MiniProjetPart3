@@ -137,7 +137,7 @@ public class CatalogueDAO_XML implements I_CatalogueDAO{
 			return null;
     }
 
-    @Override
+    @Override//Trouver une solution
     public boolean addProduit(String nom, double prix, int stock, I_Catalogue selectedCatalogue) {
         try {
 			Element root = docP.getRootElement();
