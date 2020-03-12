@@ -147,12 +147,13 @@ public class CatalogueDAORel implements I_CatalogueDAO {
 
                 System.err.println(nomCatalogue);
 
-                CallableStatement callableStatement = connection.prepareCall("{call addProduitToCatalogue(?, ?, ?, ?)}");
-                callableStatement.setInt(1, idCat);
-                callableStatement.setString(2, nom);
-                callableStatement.setDouble(3, prix);
-                callableStatement.setInt(4, stock);
-                callableStatement.executeUpdate();
+                preparedStatement = connection.prepareCall("INSERT INTO PRODUITS (IDPRODUIT, NOMPRODUIT, PRIXHTPRODUIT, QTESTOCKPRODUIT, IDCATALOGUE) "
+                        + "VALUES(seqProduits.nextval, ?, ?, ? ,?)");
+                preparedStatement.setString(1, nom);
+                preparedStatement.setDouble(2, prix);
+                preparedStatement.setInt(3, stock);
+                preparedStatement.setInt(4, idCat);
+                preparedStatement.executeUpdate();
 
                 return true;
 

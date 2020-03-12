@@ -76,6 +76,7 @@ public class CatalogueDAO_XML implements I_CatalogueDAO{
 		XMLOutputter out = new XMLOutputter();
 		try {
 			out.output(doc, new PrintWriter(uri));
+                        out.output(docP, new PrintWriter(uriP));
 			return true;
 		} catch (Exception e) {
 			System.out.println("erreur sauvegarde dans fichier XML");
@@ -88,13 +89,22 @@ public class CatalogueDAO_XML implements I_CatalogueDAO{
         try {
 			Element root = doc.getRootElement();
 			Element catalogue = chercheCatalogue(cat.getNom());
+                        
+                        Element rootProduits = docP.getRootElement();
+                        
 			if (catalogue != null) {
 				root.removeContent(catalogue);
+                                List<Element> lProd = rootProduits.getChildren("produit");
+                                int i = 0;
+		while (i < lProd.size() )
+			i++;
+		if (lProd.get(i).getAttribute("catalogue").getValue().equals(cat.getNom()))
+			rootProduits.removeContent(lProd.get(i));
 				return sauvegarde();
 			} else
 				return false;
 		} catch (Exception e) {
-			System.out.println("erreur supprimer produit");
+			System.out.println("erreur supprimer catalogue");
 			return false;
 		}
     }
@@ -123,7 +133,7 @@ public class CatalogueDAO_XML implements I_CatalogueDAO{
 				l.add(new Catalogue(nom));
 			}
 		} catch (Exception e) {
-			System.out.println("erreur lireTous tous les produits");
+			System.out.println("erreur lireTous tous les catalogues");
 		}
 		return (ArrayList<I_Catalogue>) l;
     }
@@ -137,7 +147,7 @@ public class CatalogueDAO_XML implements I_CatalogueDAO{
 			return null;
     }
 
-    @Override//Trouver une solution
+    @Override
     public boolean addProduit(String nom, double prix, int stock, I_Catalogue selectedCatalogue) {
         try {
 			Element root = docP.getRootElement();
@@ -147,8 +157,8 @@ public class CatalogueDAO_XML implements I_CatalogueDAO{
 			prod.addContent(prixEle.setText(String.valueOf(prix)));
 			Element qte = new Element("quantite");
 			prod.addContent(qte.setText(String.valueOf(stock)));
-                        Element cat = new Element("catalogue");
-                        prod.addContent(cat.setText(selectedCatalogue.getNom()));
+                        //Element cat = new Element("catalogue");
+                        prod.setAttribute("catalogue" , selectedCatalogue.getNom());
 			root.addContent(prod);
 			return sauvegarde();
 		} catch (Exception e) {
@@ -172,17 +182,23 @@ public class CatalogueDAO_XML implements I_CatalogueDAO{
     public ArrayList<I_Produit> getProduitsFromCatalogue(I_Catalogue catalogue) {
                 List<I_Produit> l = new ArrayList<I_Produit>();
 		try {
-			Element root = doc.getRootElement();
+			Element root = docP.getRootElement();
 			List<Element> lProd = root.getChildren("produit");
-
+                        int i = 1 ;
+                        
 			for (Element prod : lProd) {
+                            String nomCat= prod.getAttributeValue("catalogue");
+                            if(nomCat.equals(catalogue.getNom()))
+                            {
 				String nomP = prod.getAttributeValue("nom");
 				Double prix = Double.parseDouble(prod.getChild("prixHT").getText());
 				int qte = Integer.parseInt(prod.getChild("quantite").getText());
 				l.add(new Produit(nomP, prix, qte));
+                            }
+                            i++;
 			}
 		} catch (Exception e) {
-			System.out.println("erreur lireTous tous les produits");
+			System.out.println("erreur getProduitsFromCatalogue les catalogues");
 		}
 		return (ArrayList<I_Produit>) l;
     }
