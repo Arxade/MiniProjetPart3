@@ -15,7 +15,7 @@ import javax.swing.*;
 public class ControleurProduit extends ControleurPrincipal {
 
     public void createProduit(String nom, double prix, int qteStock) {
-        Produit produit = null;
+        I_Produit produit = null;
         if (catalogueSelected.addProduit(nom, prix, qteStock) == false) {
             JOptionPane.showMessageDialog(null, "Produit déjà existant ou prix invalide", "Erreur", JOptionPane.ERROR_MESSAGE);
         } else {
@@ -26,7 +26,7 @@ public class ControleurProduit extends ControleurPrincipal {
 
     public void removeProduit(String nomProduit) {
         catalogueSelected.removeProduit(nomProduit);
-        Produit produit = prodDao.read(nomProduit);
+        I_Produit produit = prodDao.read(nomProduit);
         prodDao.delete(produit);
         JOptionPane.showMessageDialog(null, "Produit " + produit.getNom() + " supprimé");
     }

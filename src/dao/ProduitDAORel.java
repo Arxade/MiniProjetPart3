@@ -50,7 +50,7 @@ public class ProduitDAORel implements I_ProduitDAO {
     }
 
     @Override
-    public boolean create(Produit produit) {
+    public boolean create(I_Produit produit) {
         String requete = "INSERT INTO PRODUITS (idProduit, nomProduit, prixHTProduit, QteStockProduit) "
                 + "VALUES (seqProduits.nextval,?,?,?)";
         try {
@@ -103,7 +103,7 @@ public class ProduitDAORel implements I_ProduitDAO {
     }
 
     @Override
-    public boolean update(Produit produit) {
+    public boolean update(I_Produit produit) {
         try {
             String requete = "UPDATE PRODUITS SET QTESTOCKPRODUIT = ? WHERE NOMPRODUIT = ? ";
             preparedStatement = connection.prepareStatement(requete);
@@ -118,7 +118,7 @@ public class ProduitDAORel implements I_ProduitDAO {
     }
 
     @Override
-    public boolean delete(Produit produit) {
+    public boolean delete(I_Produit produit) {
         String requete = "DELETE FROM PRODUITS WHERE NOMPRODUIT = ? ";
         try {
             preparedStatement = connection.prepareStatement(requete);

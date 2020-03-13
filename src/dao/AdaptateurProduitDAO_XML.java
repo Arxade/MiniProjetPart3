@@ -48,7 +48,7 @@ public class AdaptateurProduitDAO_XML implements I_ProduitDAO{
     }
 
     @Override
-    public boolean create(Produit produit) {
+    public boolean create(I_Produit produit) {
         return produitDAO_XML.creer(produit);
     }
 
@@ -64,12 +64,12 @@ public class AdaptateurProduitDAO_XML implements I_ProduitDAO{
 
 
     @Override
-    public boolean update(Produit produit) {
+    public boolean update(I_Produit produit) {
         return produitDAO_XML.maj(produit);
     }
 
     @Override
-    public boolean delete(Produit produit) {
+    public boolean delete(I_Produit produit) {
         return produitDAO_XML.supprimer(produit);
     }
     
