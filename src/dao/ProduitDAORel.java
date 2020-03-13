@@ -86,13 +86,14 @@ public class ProduitDAORel implements I_ProduitDAO {
     }
 
     @Override
-    public Produit read(String nomProduit) {
+    public Produit read(String nomProduit , String nomCatalogue) {
         ResultSet rs = null;
         Produit produit = null;
         try {
-            String requete = "SELECT * FROM PRODUITS WHERE NOMPRODUIT = ?";
+            String requete = "SELECT * FROM PRODUITS WHERE NOMPRODUIT = ? AND IDCATALOGUE IN (SELECT IDCATALOGUE FROM CATALOGUES WHERE NOMCATALOGUE = ?)";
             preparedStatement = connection.prepareStatement(requete);
             preparedStatement.setString(1, nomProduit);
+            preparedStatement.setString(2, nomCatalogue);
             rs = preparedStatement.executeQuery();
             rs.next();
             produit = new Produit(rs.getString("NOMPRODUIT"), rs.getDouble("PRIXHTPRODUIT"), rs.getInt("QTESTOCKPRODUIT"));
@@ -103,12 +104,13 @@ public class ProduitDAORel implements I_ProduitDAO {
     }
 
     @Override
-    public boolean update(I_Produit produit) {
+    public boolean update(I_Produit produit , String nomCatalogue) {
         try {
-            String requete = "UPDATE PRODUITS SET QTESTOCKPRODUIT = ? WHERE NOMPRODUIT = ? ";
+            String requete = "UPDATE PRODUITS SET QTESTOCKPRODUIT = ? WHERE NOMPRODUIT = ? AND IDCATALOGUE IN (SELECT IDCATALOGUE FROM CATALOGUES WHERE NOMCATALOGUE = ?)";
             preparedStatement = connection.prepareStatement(requete);
             preparedStatement.setInt(1, produit.getQuantite());
             preparedStatement.setString(2, produit.getNom());
+            preparedStatement.setString(3, nomCatalogue);
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -118,11 +120,12 @@ public class ProduitDAORel implements I_ProduitDAO {
     }
 
     @Override
-    public boolean delete(I_Produit produit) {
-        String requete = "DELETE FROM PRODUITS WHERE NOMPRODUIT = ? ";
+    public boolean delete(I_Produit produit , String nomCatalogue) {
+        String requete = "DELETE FROM PRODUITS WHERE NOMPRODUIT = ? AND IDCATALOGUE IN (SELECT IDCATALOGUE FROM CATALOGUES WHERE NOMCATALOGUE = ?)";
         try {
             preparedStatement = connection.prepareStatement(requete);
             preparedStatement.setString(1, produit.getNom());
+            preparedStatement.setString(2, nomCatalogue);
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException ex) {

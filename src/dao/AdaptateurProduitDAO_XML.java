@@ -58,19 +58,19 @@ public class AdaptateurProduitDAO_XML implements I_ProduitDAO{
     }
 
     @Override
-    public Produit read(String nomProduit) {
-        return (Produit) produitDAO_XML.lire(nomProduit);
+    public I_Produit read(String nomProduit , String nomCat) {
+        return produitDAO_XML.lire(nomProduit , nomCat);
     }
 
 
     @Override
-    public boolean update(I_Produit produit) {
-        return produitDAO_XML.maj(produit);
+    public boolean update(I_Produit produit , String nomCat) {
+        return produitDAO_XML.maj(produit , nomCat);
     }
 
     @Override
-    public boolean delete(I_Produit produit) {
-        return produitDAO_XML.supprimer(produit);
+    public boolean delete(I_Produit produit , String nomCat) {
+        return produitDAO_XML.supprimer(produit , nomCat);
     }
     
     

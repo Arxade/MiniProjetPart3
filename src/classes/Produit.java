@@ -36,10 +36,12 @@ public class Produit implements I_Produit {
         return quantiteStock;
     }
 
+    @Override
     public void setQuantiteStock(int quantiteStock) {
         this.quantiteStock = quantiteStock;
     }
 
+    @Override
     public String getNom() {
         nom = nom.replace("\t"," ");
         nom = nom.trim();
@@ -51,6 +53,7 @@ public class Produit implements I_Produit {
         this.nom = nom.trim();
     }
 
+    @Override
     public double getPrixUnitaireHT() {
         return prixUnitaireHT;
     }
@@ -60,6 +63,7 @@ public class Produit implements I_Produit {
         this.prixDecimal = BigDecimal.valueOf(prixUnitaireHT).setScale(2, RoundingMode.HALF_UP );
     }
 
+    @Override
     public BigDecimal getPrixDecimal() {
         return prixDecimal;
     }

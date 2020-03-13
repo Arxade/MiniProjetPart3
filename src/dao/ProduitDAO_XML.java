@@ -12,7 +12,7 @@ import org.jdom.output.*;
 
 
 public class ProduitDAO_XML {
-	private String uri = "D:/Produits.xml";
+	private String uri = "D:/Catalogues.xml";
 	private Document doc;
 
 	public ProduitDAO_XML() {
@@ -41,9 +41,9 @@ public class ProduitDAO_XML {
 		}
 	}
 
-	public boolean maj(I_Produit p) {
+	public boolean maj(I_Produit p , String nomCatalogue) {
 		try {
-			Element prod = chercheProduit(p.getNom());
+			Element prod = chercheProduit(p.getNom() , nomCatalogue);
 			if (prod != null) {
 				prod.getChild("quantite").setText(String.valueOf(p.getQuantite()));
 				return sauvegarde();
@@ -55,10 +55,10 @@ public class ProduitDAO_XML {
 		}
 	}
 
-	public boolean supprimer(I_Produit p) {
+	public boolean supprimer(I_Produit p , String nomCatalogue) {
 		try {
 			Element root = doc.getRootElement();
-			Element prod = chercheProduit(p.getNom());
+			Element prod = chercheProduit(p.getNom() , nomCatalogue);
 			if (prod != null) {
 				root.removeContent(prod);
 				return sauvegarde();
@@ -70,8 +70,8 @@ public class ProduitDAO_XML {
 		}
 	}
 
-	public I_Produit lire(String nom) {
-		Element e = chercheProduit(nom);
+	public I_Produit lire(String nom, String nomCatalogue) {
+		Element e = chercheProduit(nom , nomCatalogue);
 		if (e != null)
 			return new Produit(e.getAttributeValue("nom"), Double.parseDouble(e.getChildText("prixHT")), Integer.parseInt(e.getChildText("quantite")));
 		else
@@ -109,15 +109,26 @@ public class ProduitDAO_XML {
 		}
 	}
 
-	private Element chercheProduit(String nom) {
-		Element root = doc.getRootElement();
-		List<Element> lProd = root.getChildren("produit");
-		int i = 0;
-		while (i < lProd.size() && !lProd.get(i).getAttributeValue("nom").equals(nom))
-			i++;
-		if (i < lProd.size())
-			return lProd.get(i);
-		else
-			return null;
+	private Element chercheProduit(String nom , String nomCatalogue) {
+		List<Element> lCat = doc.getRootElement().getChildren();
+                Element catalogue = null;
+                for(Element cat : lCat)
+                {
+                    if(cat.getAttributeValue("nom").equals(nomCatalogue))
+                    {
+                        catalogue = cat;
+                        
+                    }
+                        
+                }
+                List<Element> lProd = catalogue.getChildren("produit");
+                int i = 0;
+                while (i < lProd.size() && !lProd.get(i).getAttributeValue("nom").equals(nom))
+                        i++;
+                if (i < lProd.size())
+                        return lProd.get(i);
+                else
+                        return null;
+		
 	}
 }
