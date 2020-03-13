@@ -28,7 +28,7 @@ public class ControleurProduit extends ControleurPrincipal {
         catalogueSelected.removeProduit(nomProduit);
         I_Produit produit = prodDao.read(nomProduit , catalogueSelected.getNom());
         prodDao.delete(produit , catalogueSelected.getNom());
-        JOptionPane.showMessageDialog(null, "Produit " + produit.getNom() + " supprimé");
+        JOptionPane.showMessageDialog(null, "Produit " + nomProduit + " supprimé");
     }
 
 }

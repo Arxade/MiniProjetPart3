@@ -145,20 +145,9 @@ public class CatalogueDAO_XML implements I_CatalogueDAO {
             return sauvegarde();
         } catch (Exception e) {
             System.out.println("erreur creer produit");
-
-        }
-        try {
-            Element cat = chercheCatalogue(selectedCatalogue.getNom());
-            cat.setAttribute("nom", nom);
-            Element prixEle = new Element("prixHT");
-            cat.addContent(prixEle.setText(String.valueOf(prix)));
-            cat.addContent(cat.setText(selectedCatalogue.getNom()));
-            return sauvegarde();
-        } catch (Exception e) {
-            System.out.println("Incrémentation nombre de produits");
             return false;
-        }
     }
+        }
 
     @Override
     public ArrayList<I_Produit> getProduitsFromCatalogue(I_Catalogue catalogue) {

@@ -26,7 +26,7 @@ public interface I_CatalogueDAO {
 
     public I_Catalogue read(String nomCatalogue);
     
-    public boolean addProduit(String nom , double prix , int stock , I_Catalogue selectedCatalogue);
+    public boolean addProduit(String nom, double prix, int stock, I_Catalogue selectedCatalogue);
     
     public ArrayList<I_Produit> getProduitsFromCatalogue(I_Catalogue catalogue);
     
