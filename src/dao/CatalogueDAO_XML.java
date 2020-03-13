@@ -86,7 +86,7 @@ public class CatalogueDAO_XML implements I_CatalogueDAO {
                 root.removeContent(catalogue);
                 List<Element> lProd = rootProduits.getChildren("produit");
                 int i = 0;
-                while (i < lProd.size() + 1) {
+                while (i < lProd.size() ) {
                     if (lProd.get(i).getAttribute("catalogue").getValue().equals(cat.getNom())) {
                         rootProduits.removeContent(lProd.get(i));
                     }
