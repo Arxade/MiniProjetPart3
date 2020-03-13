@@ -16,11 +16,17 @@ public class ProduitDAO_XML {
     private Document doc;
 
     public ProduitDAO_XML() {
+        this.connect();
+    }
+    
+    public boolean connect() {
         SAXBuilder sdoc = new SAXBuilder();
         try {
             doc = sdoc.build(uri);
+            return true;
         } catch (Exception e) {
             System.out.println("erreur construction arbre JDOM");
+            return false;
         }
     }
 
@@ -105,6 +111,8 @@ public class ProduitDAO_XML {
         XMLOutputter out = new XMLOutputter();
         try {
             out.output(doc, new PrintWriter(uri));
+                        this.connect();
+
             return true;
         } catch (Exception e) {
             System.out.println("erreur sauvegarde dans fichier XML");
@@ -123,7 +131,6 @@ public class ProduitDAO_XML {
         List<Element> lProd = catalogue.getChildren("produit");
         int i = 0;
         while (i < lProd.size() && !lProd.get(i).getAttributeValue("nom").equals(nomProduit)) {
-            System.out.println(lProd.get(i).getAttributeValue("nom"));
             i++;
         }
         if (i < lProd.size()) {

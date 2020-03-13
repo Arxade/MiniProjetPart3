@@ -6,8 +6,6 @@
 package dao;
 
 import classes.I_Produit;
-import classes.Produit;
-import classes.ProduitFactory;
 import java.util.ArrayList;
 
 /**
@@ -19,32 +17,9 @@ public class AdaptateurProduitDAO_XML implements I_ProduitDAO{
     private ProduitDAO_XML produitDAO_XML;
     static private AdaptateurProduitDAO_XML instanceDAO;
     
-    protected AdaptateurProduitDAO_XML()
+    public AdaptateurProduitDAO_XML()
     {
-        this.connect();
-    }
-    
-    static public AdaptateurProduitDAO_XML getInstance()
-    {
-        if(instanceDAO == null)
-        {
-            instanceDAO = new AdaptateurProduitDAO_XML();
-        }
-        return instanceDAO;
-    }
-    
-    @Override
-    public boolean connect() {
-        try
-        {
-            System.out.println("Connexion à la BDD");
             produitDAO_XML = new ProduitDAO_XML();
-            return true;
-        }
-        catch(Exception e)
-        {
-            return false;
-        }
     }
 
     @Override

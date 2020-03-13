@@ -40,11 +40,6 @@ public class ProduitDAORel implements I_ProduitDAO {
         return instanceDAO;
     }
 
-    @Override
-    public boolean connect() {
-        return true;
-    }
-
     protected ProduitDAORel(Connection co) {
         this.connection = co;
     }

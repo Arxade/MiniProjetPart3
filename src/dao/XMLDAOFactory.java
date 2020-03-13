@@ -16,7 +16,7 @@ public class XMLDAOFactory extends DAOAbstractFactory{
 
     @Override
     public  I_ProduitDAO createProduitDAO() {
-        return AdaptateurProduitDAO_XML.getInstance();
+        return new AdaptateurProduitDAO_XML();
     }
 
     @Override

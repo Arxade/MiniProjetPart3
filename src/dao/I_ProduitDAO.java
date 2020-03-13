@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public interface I_ProduitDAO {
 
-    public boolean connect();
+
 
     public boolean create(I_Produit produit);
     
