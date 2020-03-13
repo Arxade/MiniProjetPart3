@@ -58,8 +58,8 @@ public class AdaptateurProduitDAO_XML implements I_ProduitDAO{
     }
 
     @Override
-    public I_Produit read(String nomProduit) {
-        return produitDAO_XML.lire(nomProduit);
+    public Produit read(String nomProduit) {
+        return (Produit) produitDAO_XML.lire(nomProduit);
     }
 
 
