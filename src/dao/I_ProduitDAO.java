@@ -23,7 +23,7 @@ public interface I_ProduitDAO {
 
     public ArrayList<I_Produit> readAll();
 
-    public Produit read(String nomProduit);
+    public I_Produit read(String nomProduit);
     
     public boolean update(Produit produit);
     

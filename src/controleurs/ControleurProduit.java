@@ -26,7 +26,7 @@ public class ControleurProduit extends ControleurPrincipal {
 
     public void removeProduit(String nomProduit) {
         catalogueSelected.removeProduit(nomProduit);
-        Produit produit = prodDao.read(nomProduit);
+        Produit produit = (Produit) prodDao.read(nomProduit);
         prodDao.delete(produit);
         JOptionPane.showMessageDialog(null, "Produit " + produit.getNom() + " supprimé");
     }
