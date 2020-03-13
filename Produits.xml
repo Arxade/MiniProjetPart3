@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <listeProduits>
-	<produit nom="un Fruit rigolo" catalogue="Fruits">
-		<prixHT>10.0</prixHT>
-		<quantite>20</quantite>
-	</produit>
-<produit nom="Legume de test" catalogue="Légumes"><prixHT>1.0</prixHT><quantite>50</quantite></produit></listeProduits>
+	
+<produit nom="Legume de test" catalogue="Légumes"><prixHT>1.0</prixHT><quantite>50</quantite></produit><produit nom="UnFruitTropCool" catalogue="Fruits"><prixHT>5.0</prixHT><quantite>90</quantite></produit><produit nom="NeoProd" catalogue="Fruits"><prixHT>777.0</prixHT><quantite>5</quantite></produit><produit nom="OKLM" catalogue="Fruits"><prixHT>91.0</prixHT><quantite>2</quantite></produit><produit nom="j" catalogue="Fruits"><prixHT>5.0</prixHT><quantite>6</quantite></produit></listeProduits>
