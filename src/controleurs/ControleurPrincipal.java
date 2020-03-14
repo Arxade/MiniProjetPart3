@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  */
 public class ControleurPrincipal {
 
-    private DAOAbstractFactory daoAbs = DAOAbstractFactory.getInstance("Relationnel");
+    private DAOAbstractFactory daoAbs = DAOAbstractFactory.getInstance("XML");
     protected I_CatalogueDAO catDao = daoAbs.createCatalogueDAO();
     protected I_ProduitDAO prodDao = daoAbs.createProduitDAO();
     protected EnsembleCatalogue ensembleCat;
@@ -46,7 +46,7 @@ public class ControleurPrincipal {
     }
 
     public String[] getDetailsDesCatalogues() {
-        return ensembleCat.getDétailsDesCatalogues();
+        return ensembleCat.getDetailsDesCatalogues();
     }
 
     public int getNombreDeCatalogues() {

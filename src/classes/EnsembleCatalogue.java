@@ -44,7 +44,7 @@ public class EnsembleCatalogue {
         return lesNomsTab;
     }
     
-    public String[] getDétailsDesCatalogues() {
+    public String[] getDetailsDesCatalogues() {
         ArrayList<String> lesNomsAL = new ArrayList<>();
         for (I_Catalogue cat : lesCatalogues) {
             lesNomsAL.add(cat.getNom() + " : " + cat.getNbProduits() + " produits");
