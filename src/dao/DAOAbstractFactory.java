@@ -30,21 +30,7 @@ public abstract class DAOAbstractFactory {
         }
         return instance;
     }
-    
-    //        public static DAOAbstractFactory getInstance(String typeBDD) {
-//        if (instance == null) {
-//            switch (typeBDD) {
-//                case "Relationnel":
-//                    instance = RelDAOFactory.getInstance();
-//                case "XML":
-//                    instance = XMLDAOFactory.getInstance();
-//                default:
-//                    instance = null;
-//            }
-//        }
-//        return instance;
-//    }
-    
+            
     abstract public I_CatalogueDAO createCatalogueDAO();
     
     abstract public I_ProduitDAO createProduitDAO();
