@@ -15,14 +15,35 @@ public abstract class DAOAbstractFactory {
     
     protected DAOAbstractFactory(){}
     
-    public synchronized static DAOAbstractFactory getInstance()
-    {
-        if(instance == null)
-        {
-            instance = RelDAOFactory.getInstance();
+            public static DAOAbstractFactory getInstance(String typeBDD) {
+        if (instance == null) {
+            switch (typeBDD) {
+                case "Relationnel":
+                    instance = RelDAOFactory.getInstance();
+                    break;
+                case "XML":
+                    instance = XMLDAOFactory.getInstance();
+                    break;
+                default:
+                    instance = null;
+            }
         }
         return instance;
     }
+    
+    //        public static DAOAbstractFactory getInstance(String typeBDD) {
+//        if (instance == null) {
+//            switch (typeBDD) {
+//                case "Relationnel":
+//                    instance = RelDAOFactory.getInstance();
+//                case "XML":
+//                    instance = XMLDAOFactory.getInstance();
+//                default:
+//                    instance = null;
+//            }
+//        }
+//        return instance;
+//    }
     
     abstract public I_CatalogueDAO createCatalogueDAO();
     

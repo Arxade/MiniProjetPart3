@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  */
 public class ControleurPrincipal {
 
-    private DAOAbstractFactory daoAbs = DAOAbstractFactory.getInstance();
+    private DAOAbstractFactory daoAbs = DAOAbstractFactory.getInstance("XML");
     protected I_CatalogueDAO catDao = daoAbs.createCatalogueDAO();
     protected I_ProduitDAO prodDao = daoAbs.createProduitDAO();
     protected EnsembleCatalogue ensembleCat = getEnsembleCatalogue();
