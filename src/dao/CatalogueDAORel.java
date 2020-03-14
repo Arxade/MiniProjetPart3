@@ -65,11 +65,6 @@ public class CatalogueDAORel implements I_CatalogueDAO {
     }
 
     @Override
-    public Connection getConnection() {
-        return connection;
-    }
-
-    @Override
     public boolean create(I_Catalogue cat) {
         String requete = "INSERT INTO CATALOGUES (idCatalogue, nomCatalogue) "
                 + "VALUES (seqCatalogues.nextval,?)";
@@ -131,6 +126,26 @@ public class CatalogueDAORel implements I_CatalogueDAO {
             System.out.println("Erreur read : " + ex);
         }
         return cat;
+    }
+    
+    @Override
+    public int getNbProduits(I_Catalogue catalogue) {
+        ResultSet rs = null;
+        int nbProduits = 0;
+        try {
+            String requete = "SELECT COUNT(*) "
+                    + "FROM PRODUITS "
+                    + "NATURAL JOIN CATALOGUES "
+                    + "WHERE NOMCATALOGUE = ?";
+            preparedStatement = connection.prepareStatement(requete);
+            preparedStatement.setString(1, catalogue.getNom());
+            rs = preparedStatement.executeQuery();
+            rs.next();
+            nbProduits = rs.getInt(1);
+        } catch (SQLException ex) {
+            System.out.println("Erreur count produits : " + ex);
+        }
+        return nbProduits;
     }
 
     @Override

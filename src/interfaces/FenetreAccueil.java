@@ -13,7 +13,7 @@ public class FenetreAccueil extends JFrame implements ActionListener, WindowList
     private JLabel lbNbCatalogues;
     private JComboBox cmbSupprimer, cmbSelectionner;
     private TextArea taDetailCatalogues;
-    private ControleurPrincipal ctrl = new ControleurPrincipal();
+    private static ControleurPrincipal ctrl = new ControleurPrincipal();
 
     public FenetreAccueil() {
         setTitle("Catalogues");
@@ -107,7 +107,7 @@ public class FenetreAccueil extends JFrame implements ActionListener, WindowList
             String texteSelection = (String) cmbSelectionner.getSelectedItem();
             if (texteSelection != null) {
                 System.out.println("selectionne catalogue " + texteSelection);
-                ctrl.setCatalogue(texteSelection);
+                ctrl.setCatalogueSelectionne(texteSelection);
                 new FenetrePrincipale(ctrl);
                 this.setVisible(false);
             }
@@ -160,6 +160,9 @@ public class FenetreAccueil extends JFrame implements ActionListener, WindowList
     }
 
     public static void main(String[] args) {
+        ctrl.chargerCatalogues();
         new FenetreAccueil();
+
+            
     }
 }

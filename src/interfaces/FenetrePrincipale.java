@@ -79,7 +79,7 @@ public class FenetrePrincipale extends JFrame implements ActionListener,
 //		String[] tabCategories = new String[] {"Bio", "Luxe" };
         
         if (e.getSource() == btAfficher) {
-            new FenetreAffichage("Catalogue sélectionné : " + ctrlPrincipal.getCatalogueSelected().getNom() + "\n" + ctrlStock.getStock() );
+            new FenetreAffichage("Catalogue sélectionné : " + ctrlPrincipal.getCatalogueSelectionne().getNom() + "\n" + ctrlStock.getStock() );
         }
         if (e.getSource() == btNouveauProduit) //			new FenetreNouveauProduit(tabCategories);
         {

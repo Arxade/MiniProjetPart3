@@ -20,7 +20,7 @@ public class ControleurTransaction extends ControleurPrincipal{
     
     public void enregistrerAchat(String nomProduit, int qteAchete, Component laFenetre)
     {
-        boolean achete = catalogueSelected.acheterStock(nomProduit, qteAchete);
+        boolean achete = catalogueSelectionne.acheterStock(nomProduit, qteAchete);
         
         if(!achete)
         {
@@ -28,16 +28,16 @@ public class ControleurTransaction extends ControleurPrincipal{
         }
         else
         {
-            I_Produit produit = prodDao.read(nomProduit , catalogueSelected.getNom());
+            I_Produit produit = prodDao.read(nomProduit , catalogueSelectionne.getNom());
             produit.setQuantiteStock(produit.getQuantite() + qteAchete);
-            prodDao.update(produit , catalogueSelected.getNom());
+            prodDao.update(produit , catalogueSelectionne.getNom());
             JOptionPane.showMessageDialog(laFenetre, "Produit acheté");
         }
     }
     
     public void enregistrerVente(String nomProduit, int QteVendue, Component laFenetre)
     {
-        boolean vendu = catalogueSelected.vendreStock(nomProduit, QteVendue);
+        boolean vendu = catalogueSelectionne.vendreStock(nomProduit, QteVendue);
         
         if(!vendu)
         {
@@ -45,9 +45,9 @@ public class ControleurTransaction extends ControleurPrincipal{
         }
         else
         {
-            I_Produit produit = prodDao.read(nomProduit , catalogueSelected.getNom());
+            I_Produit produit = prodDao.read(nomProduit , catalogueSelectionne.getNom());
             produit.setQuantiteStock(produit.getQuantite() - QteVendue);
-            prodDao.update(produit , catalogueSelected.getNom());
+            prodDao.update(produit , catalogueSelectionne.getNom());
             JOptionPane.showMessageDialog(laFenetre, "Produit vendu");
         }
     }

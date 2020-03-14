@@ -17,81 +17,77 @@ import javax.swing.JOptionPane;
  */
 public class ControleurPrincipal {
 
-    private DAOAbstractFactory daoAbs = DAOAbstractFactory.getInstance("XML");
+    private DAOAbstractFactory daoAbs = DAOAbstractFactory.getInstance("Relationnel");
     protected I_CatalogueDAO catDao = daoAbs.createCatalogueDAO();
     protected I_ProduitDAO prodDao = daoAbs.createProduitDAO();
-    protected EnsembleCatalogue ensembleCat = getEnsembleCatalogue();
-    protected I_Catalogue catalogueSelected;
-    
+    protected EnsembleCatalogue ensembleCat;
+    protected I_Catalogue catalogueSelectionne;
+
     public void addCatalogue(String nomCatalogue) {
         Catalogue catalogue = new Catalogue(nomCatalogue);
         ensembleCat.addCatalogue(catalogue);
         catDao.create(catalogue);
-        JOptionPane.showMessageDialog(null, "Catalogue "+nomCatalogue+" ajouté");
+        JOptionPane.showMessageDialog(null, "Catalogue " + nomCatalogue + " ajouté");
     }
 
     public void removeCatalogue(String nomCatalogue) {
         I_Catalogue removedCat = ensembleCat.getCatalogueFromNom(nomCatalogue);
         catDao.delete(removedCat);
         ensembleCat.removeCatalogue(removedCat);
-        JOptionPane.showMessageDialog(null, "Catalogue "+nomCatalogue+" supprimé");
+        JOptionPane.showMessageDialog(null, "Catalogue " + nomCatalogue + " supprimé");
     }
-    
-    public ArrayList<I_Catalogue> getLesCatalogues(){
+
+    public ArrayList<I_Catalogue> getLesCatalogues() {
         return ensembleCat.getLesCatalogues();
     }
 
     public String[] getNomsDesCatalogues() {
         return ensembleCat.getNomsDesCatalogues();
     }
-    
+
     public String[] getDetailsDesCatalogues() {
         return ensembleCat.getDétailsDesCatalogues();
     }
-    
+
     public int getNombreDeCatalogues() {
         return ensembleCat.getNombreDeCatalogues();
     }
-    
-    public EnsembleCatalogue getEnsembleCatalogue() {
+
+    public void chargerCatalogues() {
         EnsembleCatalogue ec = new EnsembleCatalogue();
         ec.addLesCatalogues(catDao.readAll());
-        for (I_Catalogue leCatalogue : ec.getLesCatalogues())
-        {
-           leCatalogue.addProduits(catDao.getProduitsFromCatalogue(leCatalogue));
+        for (I_Catalogue leCatalogue : ec.getLesCatalogues()) {
+            leCatalogue.setNbProduits(catDao.getNbProduits(leCatalogue));
+            System.out.println(catDao.getNbProduits(leCatalogue) + " produits");
         }
-
-        return ec;
-    }
-    
-    public void setCatalogue(String catalogueSelectionne){
-        catalogueSelected = ensembleCat.getCatalogueFromNom(catalogueSelectionne);
+        ensembleCat = ec;
     }
 
-    public I_Catalogue getCatalogueSelected() {
-        return catalogueSelected;
+    public void setCatalogueSelectionne(String nomCatalogueSelectionne) {
+        catalogueSelectionne = ensembleCat.getCatalogueFromNom(nomCatalogueSelectionne);
+        catalogueSelectionne.addProduits(catDao.getProduitsFromCatalogue(catalogueSelectionne));
     }
-    
-    public ControleurStock createControleurStock(){
+
+    public I_Catalogue getCatalogueSelectionne() {
+        return catalogueSelectionne;
+    }
+
+    public ControleurStock createControleurStock() {
         ControleurStock ctrlStock = new ControleurStock();
-        ctrlStock.catalogueSelected = this.catalogueSelected;
+        ctrlStock.catalogueSelectionne = this.catalogueSelectionne;
         return ctrlStock;
     }
 
     public ControleurProduit createControleurProduit() {
         ControleurProduit ctrlProduit = new ControleurProduit();
-        ctrlProduit.catalogueSelected = this.catalogueSelected;
+        ctrlProduit.catalogueSelectionne = this.catalogueSelectionne;
         return ctrlProduit;
     }
 
     public ControleurTransaction createControleurTransaction() {
         ControleurTransaction ctrlTransaction = new ControleurTransaction();
-        ctrlTransaction.catalogueSelected = this.catalogueSelected;
+        ctrlTransaction.catalogueSelectionne = this.catalogueSelectionne;
         return ctrlTransaction;
     }
-    
-
-    
 
 }
-

@@ -11,11 +11,11 @@ package controleurs;
 public class ControleurStock extends ControleurPrincipal{  
     
     public String getStock(){
-        return catalogueSelected.toString();
+        return catalogueSelectionne.toString();
     }
     
     public String[] getNomsProduits() {
-        return catalogueSelected.getNomProduits();
+        return catalogueSelectionne.getNomProduits();
     }
     
     

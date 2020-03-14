@@ -29,6 +29,6 @@ public interface I_CatalogueDAO {
     
     public ArrayList<I_Produit> getProduitsFromCatalogue(I_Catalogue catalogue);
     
-    public Connection getConnection();
+    public int getNbProduits(I_Catalogue catalogue);
     
 }

@@ -24,7 +24,6 @@ import org.jdom.output.XMLOutputter;
  */
 public class CatalogueDAOXML implements I_CatalogueDAO {
 
-    private static CatalogueDAOXML instance;
     private String uri = "D:/Catalogues.xml";
     private Document doc;
 
@@ -106,7 +105,7 @@ public class CatalogueDAOXML implements I_CatalogueDAO {
 
     @Override
     public ArrayList<I_Catalogue> readAll() {
-        List<I_Catalogue> l = new ArrayList<I_Catalogue>();
+        List<I_Catalogue> l = new ArrayList<>();
         try {
             Element root = doc.getRootElement();
             List<Element> lCat = root.getChildren("catalogue");
@@ -151,7 +150,7 @@ public class CatalogueDAOXML implements I_CatalogueDAO {
 
     @Override
     public ArrayList<I_Produit> getProduitsFromCatalogue(I_Catalogue catalogue) {
-        List<I_Produit> l = new ArrayList<I_Produit>();
+        List<I_Produit> l = new ArrayList<>();
         try {
             Element root = chercheCatalogue(catalogue.getNom());
             List<Element> lProd = root.getChildren("produit");
@@ -172,8 +171,18 @@ public class CatalogueDAOXML implements I_CatalogueDAO {
     }
 
     @Override
-    public Connection getConnection() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int getNbProduits(I_Catalogue catalogue) {
+        int nbProduits = 0;
+        try {
+            Element root = chercheCatalogue(catalogue.getNom());
+            List<Element> lProd = root.getChildren("produit");
+            for (Element prod : lProd) {
+                nbProduits++;
+            }
+        } catch (Exception e) {
+            System.out.println("erreur nbProduits" + e);
+        }
+        return nbProduits;
     }
 
 }

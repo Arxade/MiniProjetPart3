@@ -18,7 +18,17 @@ public class Catalogue implements I_Catalogue {
 
     private String nom;
     private ArrayList<I_Produit> ensembleProduits = new ArrayList<>();
-    //private static Catalogue instance;
+    private int nbProduits;
+
+    @Override
+    public int getNbProduits() {
+        return nbProduits;
+    }
+
+    @Override
+    public void setNbProduits(int nbProduits) {
+        this.nbProduits = nbProduits;
+    }
 
     
     @Override

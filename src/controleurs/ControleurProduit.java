@@ -16,18 +16,18 @@ public class ControleurProduit extends ControleurPrincipal {
 
     public void createProduit(String nom, double prix, int qteStock) {
         I_Produit produit = null;
-        if (catalogueSelected.addProduit(nom, prix, qteStock) == false) {
+        if (catalogueSelectionne.addProduit(nom, prix, qteStock) == false) {
             JOptionPane.showMessageDialog(null, "Produit déjà existant ou prix invalide", "Erreur", JOptionPane.ERROR_MESSAGE);
         } else {
-        catDao.addProduit(nom , prix , qteStock , catalogueSelected);
+        catDao.addProduit(nom , prix , qteStock , catalogueSelectionne);
         JOptionPane.showMessageDialog(null, "Le produit " + nom + " a bien été créé.", "Produit créé", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
     public void removeProduit(String nomProduit) {
-        catalogueSelected.removeProduit(nomProduit);
-        I_Produit produit = prodDao.read(nomProduit , catalogueSelected.getNom());
-        prodDao.delete(produit , catalogueSelected.getNom());
+        catalogueSelectionne.removeProduit(nomProduit);
+        I_Produit produit = prodDao.read(nomProduit , catalogueSelectionne.getNom());
+        prodDao.delete(produit , catalogueSelectionne.getNom());
         JOptionPane.showMessageDialog(null, "Produit " + nomProduit + " supprimé");
     }
 
