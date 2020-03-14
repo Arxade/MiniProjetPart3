@@ -22,13 +22,13 @@ import org.jdom.output.XMLOutputter;
  *
  * @author Alexandre
  */
-public class CatalogueDAO_XML implements I_CatalogueDAO {
+public class CatalogueDAOXML implements I_CatalogueDAO {
 
     private static I_CatalogueDAO instance;
     private String uri = "D:/Catalogues.xml";
     private Document doc;
 
-    protected CatalogueDAO_XML() {
+    protected CatalogueDAOXML() {
         this.connect();
     }
 

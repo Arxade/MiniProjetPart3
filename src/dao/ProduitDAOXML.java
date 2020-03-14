@@ -10,12 +10,12 @@ import org.jdom.*;
 import org.jdom.input.*;
 import org.jdom.output.*;
 
-public class ProduitDAO_XML {
+public class ProduitDAOXML {
 
     private String uri = "D:/Catalogues.xml";
     private Document doc;
 
-    public ProduitDAO_XML() {
+    public ProduitDAOXML() {
         this.connect();
     }
     

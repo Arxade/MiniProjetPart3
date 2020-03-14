@@ -14,13 +14,39 @@ import java.sql.SQLException;
  *
  * @author Alexandre
  */
-public class RelDAOFactory extends DAOAbstractFactory{
+public class RelDAOFactory extends DAOAbstractFactory {
 
-    public  I_CatalogueDAO createCatalogueDAO() {
-        return CatalogueDAORel.getInstance();
+    private Connection cn;
+    private static RelDAOFactory instance;
+
+    protected RelDAOFactory() {
+        connect();
     }
-    
-    public  I_ProduitDAO createProduitDAO() {
-        return ProduitDAORel.getInstance(CatalogueDAORel.getInstance().getConnection());
+
+    public static RelDAOFactory getInstance() {
+        if (instance == null) {
+            instance = new RelDAOFactory();
+        }
+        return instance;
+    }
+
+    public boolean connect() {
+        try {
+            String url = "jdbc:oracle:thin:@162.38.222.149:1521:iut";
+            cn = DriverManager.getConnection(url, "bernadaca", "1110042889h");
+            System.out.println("Connexion à la BDD");
+            return true;
+        } catch (HeadlessException | SQLException e) {
+            javax.swing.JOptionPane.showMessageDialog(null, e);
+            return false;
+        }
+    }
+
+    public I_CatalogueDAO createCatalogueDAO() {
+        return CatalogueDAORel.getInstance(cn);
+    }
+
+    public I_ProduitDAO createProduitDAO() {
+        return ProduitDAORel.getInstance(cn);
     }
 }

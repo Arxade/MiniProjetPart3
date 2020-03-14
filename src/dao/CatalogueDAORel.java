@@ -34,20 +34,23 @@ public class CatalogueDAORel implements I_CatalogueDAO {
     private PreparedStatement preparedStatement = null;
     private static I_CatalogueDAO instance;
     
-    public static I_CatalogueDAO getInstance()
+    public static I_CatalogueDAO getInstance(Connection cn)
     {
         if(instance == null)
         {
-            instance = new CatalogueDAORel();
+            instance = new CatalogueDAORel(cn);
         }
         return instance;
     }
     
     private CatalogueDAORel()
     {
-        this.connect();
     }
-    
+
+    private CatalogueDAORel(Connection cn) {
+        connection = cn;
+    }
+
     @Override
     public boolean connect() {
          try {
@@ -83,7 +86,7 @@ public class CatalogueDAORel implements I_CatalogueDAO {
 
     @Override
     public boolean delete(I_Catalogue cat) {
-        String requete = "DELETE FROM CATALOGUES WHERE NOMCATALOGUE = ? ";
+        String requete = "DELETE FROM CATALOGUES WHERE NOMCATALOGUE = ?";
         try {
             preparedStatement = connection.prepareStatement(requete);
             preparedStatement.setString(1, cat.getNom());

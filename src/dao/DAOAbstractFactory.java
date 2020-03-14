@@ -19,7 +19,7 @@ public abstract class DAOAbstractFactory {
     {
         if(instance == null)
         {
-            instance = new XMLDAOFactory();
+            instance = RelDAOFactory.getInstance();
         }
         return instance;
     }

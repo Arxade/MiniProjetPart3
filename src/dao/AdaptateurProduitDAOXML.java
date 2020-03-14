@@ -12,14 +12,14 @@ import java.util.ArrayList;
  *
  * @author Alexandre
  */
-public class AdaptateurProduitDAO_XML implements I_ProduitDAO{
+public class AdaptateurProduitDAOXML implements I_ProduitDAO{
 
-    private ProduitDAO_XML produitDAO_XML;
-    static private AdaptateurProduitDAO_XML instanceDAO;
+    private ProduitDAOXML produitDAO_XML;
+    static private AdaptateurProduitDAOXML instanceDAO;
     
-    public AdaptateurProduitDAO_XML()
+    public AdaptateurProduitDAOXML()
     {
-            produitDAO_XML = new ProduitDAO_XML();
+            produitDAO_XML = new ProduitDAOXML();
     }
 
     @Override

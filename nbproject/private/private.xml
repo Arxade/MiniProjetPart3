@@ -3,17 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ixada/Documents/NetBeansProjects/MiniProjetPart3/src/controleurs/ControleurStock.java</file>
             <file>file:/C:/Users/ixada/Documents/NetBeansProjects/MiniProjetPart3/src/dao/XMLDAOFactory.java</file>
             <file>file:/C:/Users/ixada/Documents/NetBeansProjects/MiniProjetPart3/src/dao/CatalogueDAO_XML.java</file>
+            <file>file:/C:/Users/ixada/Documents/NetBeansProjects/MiniProjetPart3/src/dao/RelDAOFactory.java</file>
             <file>file:/C:/Users/ixada/Documents/NetBeansProjects/MiniProjetPart3/src/dao/I_CatalogueDAO.java</file>
             <file>file:/C:/Users/ixada/Documents/NetBeansProjects/MiniProjetPart3/src/dao/AdaptateurProduitDAO_XML.java</file>
             <file>file:/C:/Users/ixada/Documents/NetBeansProjects/MiniProjetPart3/src/dao/ProduitDAO_XML.java</file>
             <file>file:/C:/Users/ixada/Documents/NetBeansProjects/MiniProjetPart3/src/controleurs/ControleurProduit.java</file>
             <file>file:/C:/Users/ixada/Documents/NetBeansProjects/MiniProjetPart3/src/controleurs/ControleurTransaction.java</file>
             <file>file:/C:/Users/ixada/Documents/NetBeansProjects/MiniProjetPart3/src/dao/ProduitDAORel.java</file>
+            <file>file:/C:/Users/ixada/Documents/NetBeansProjects/MiniProjetPart3/src/dao/DAOAbstractFactory.java</file>
             <file>file:/C:/Users/ixada/Documents/NetBeansProjects/MiniProjetPart3/src/dao/I_ProduitDAO.java</file>
-            <file>file:/C:/Users/ixada/Documents/NetBeansProjects/MiniProjetPart3/src/classes/I_Produit.java</file>
         </group>
     </open-files>
 </project-private>
