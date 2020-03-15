@@ -15,7 +15,7 @@ public abstract class DAOAbstractFactory {
     
     protected DAOAbstractFactory(){}
     
-            public static DAOAbstractFactory getInstance(String typeBDD) {
+    public static DAOAbstractFactory getInstance(String typeBDD) {
         if (instance == null) {
             switch (typeBDD) {
                 case "Relationnel":
@@ -30,7 +30,7 @@ public abstract class DAOAbstractFactory {
         }
         return instance;
     }
-            
+     
     abstract public I_CatalogueDAO createCatalogueDAO();
     
     abstract public I_ProduitDAO createProduitDAO();

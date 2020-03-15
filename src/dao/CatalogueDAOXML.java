@@ -24,7 +24,7 @@ import org.jdom.output.XMLOutputter;
  */
 public class CatalogueDAOXML implements I_CatalogueDAO {
 
-    private String uri = "D:/Catalogues.xml";
+    private String uri = "Catalogues.xml";
     private Document doc;
 
     protected CatalogueDAOXML() {
